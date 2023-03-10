@@ -1,0 +1,14 @@
+SMAP
+shop_002dindex_002dheader_002dfix_jsp.java
+JSP
+*S JSP
+*F
++ 0 shop-index-header-fix.jsp
+shop-index-header-fix.jsp
+*L
+5,59:44
+64:103,3
+65,471:106
+536:577,3
+537,39:580
+*E
