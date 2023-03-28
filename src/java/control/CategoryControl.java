@@ -6,6 +6,7 @@
 package control;
 
 import dao.DAO;
+import entity.Brand;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
@@ -36,18 +37,21 @@ public class CategoryControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String cateID = request.getParameter("cid");
         // lay duoc category ve
         DAO dao = new DAO();
         List<Product> list = dao.getProductByCID(cateID);
         List<Category> listC = dao.getAllCategory();
         List<Product> top3lastP = dao.getTop3Last();
+        List<Brand> listB = dao.getAllBrand();
         
-        
+        request.setAttribute("listB", listB);
         request.setAttribute("listP", list);
         request.setAttribute("listCC", listC);
         request.setAttribute("p3l", top3lastP);
         request.setAttribute("tag", cateID);
+        
         request.getRequestDispatcher("shop-product-list.jsp").forward(request, response);
         
     }

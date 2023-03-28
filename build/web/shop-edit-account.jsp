@@ -76,11 +76,11 @@
                         </div>
                         <div class="form-group">
                             <label>Username</label>
-                            <input value="${acc.user}" name="user" type="text" class="form-control" required>
+                            <input value="${acc.user}" name="user" type="text" class="form-control" readonly required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input value="${acc.pass}" name="pass" type="pass" class="form-control" required>
+                            <input value="${acc.pass}" name="pass" type="pass" class="form-control" readonly required>
                         </div>
                         <div class="form-group">
                             <label>Fullname</label>
@@ -91,11 +91,22 @@
                             <input value="${acc.phone}" name="phone" type="tel" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Address</label>
-                            <input value="${acc.address}" name="address" type="text" class="form-control" required>
-                        </div>
+                            <select class="form-group" id="city" name="city">
+                                <option class="form-control" value="${acc.city}" selected>${acc.city}</option>           
+                            </select>
+                            <br>
+                            <select class="form-group" id="district" name="district">
+                                <option class="form-control" value="${acc.district}" selected>${acc.district}</option>
+                            </select>
+                            <br>
+                            <select class="form-group" id="ward" name="ward">
+                                <option class="form-control" value="${acc.ward}" selected>${acc.ward}</option>
+                            </select>
+                        </div> 
                         <div class="form-group">
                             <label>Sellstrators</label>
+                            <br>
+                            <input name="sell" type="radio" value="${acc.isSell}" class="form-group" checked> DEFAULT
                             <br>
                             <input name="sell" type="radio" value="0" class="form-group"> NO
                             <br>
@@ -104,6 +115,8 @@
                         </div>
                         <div class="form-group">
                             <label>Administrators</label>
+                            <br>
+                            <input name="admin" type="radio" value="${acc.isAdmin}" class="form-group"checked> DEFAULT
                             <br>
                             <input name="admin" type="radio" value="0" class="form-group"> NO
                             <br>
@@ -155,6 +168,61 @@
             });
         </script>
         <!-- END PAGE LEVEL JAVASCRIPTS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <script>
+            var citis = document.getElementById("city");
+            var districts = document.getElementById("district");
+            var wards = document.getElementById("ward");
+            var Parameter = {
+                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                method: "GET",
+                responseType: "application/json",
+            };
+            var promise = axios(Parameter);
+            promise.then(function (result) {
+                renderCity(result.data);
+            });
+
+            function renderCity(data) {
+                for (const x of data) {
+                    var opt = document.createElement('option');
+                    opt.value = x.Name;
+                    opt.text = x.Name;
+                    opt.setAttribute('data-id', x.Id);
+                    citis.options.add(opt);
+                }
+                citis.onchange = function () {
+                    district.length = 1;
+                    ward.length = 1;
+                    if (this.options[this.selectedIndex].dataset.id != "") {
+                        const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+                        for (const k of result[0].Districts) {
+                            var opt = document.createElement('option');
+                            opt.value = k.Name;
+                            opt.text = k.Name;
+                            opt.setAttribute('data-id', k.Id);
+                            district.options.add(opt);
+                        }
+                    }
+                };
+                district.onchange = function () {
+                    ward.length = 1;
+                    const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+                    if (this.options[this.selectedIndex].dataset.id != "") {
+                        const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex].dataset.id)[0].Wards;
+
+                        for (const w of dataWards) {
+                            var opt = document.createElement('option');
+                            opt.value = w.Name;
+                            opt.text = w.Name;
+                            opt.setAttribute('data-id', w.Id);
+                            wards.options.add(opt);
+                        }
+                    }
+                };
+            }
+        </script>
     </body>
     <!-- END BODY -->
 </html>

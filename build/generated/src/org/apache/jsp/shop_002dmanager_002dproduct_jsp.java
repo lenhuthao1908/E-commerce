@@ -106,7 +106,7 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
       out.write("        <link href=\"assets/corporate/css/custom.css\" rel=\"stylesheet\">        \n");
       out.write("        <link href=\"assets/pages/css/portfolio.css\" rel=\"stylesheet\">\n");
       out.write("\n");
-      out.write("        \n");
+      out.write("\n");
       out.write("        <!-- Theme styles END -->\n");
       out.write("    </head>\n");
       out.write("    <!-- Head END -->\n");
@@ -124,6 +124,7 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
       out.write("                        <!-- BEGIN CONTENT -->\n");
       out.write("                        <div class=\"col-md-12 col-sm-12\">\n");
       out.write("                            <h1>Manager product</h1>\n");
+      out.write("                            <button href=\"#addEmployeeModal\"  data-toggle=\"modal\" class=\"btn btn-primary\" ><i class=\"fa fa-plus\"></i> Add product</button>\n");
       out.write("                            <div class=\"goods-page\">\n");
       out.write("                                <div class=\"goods-data clearfix\">\n");
       out.write("                                    <div class=\"table-wrapper-responsive\">\n");
@@ -144,8 +145,6 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
       out.write("                                    </table>\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
-      out.write("                            <button class=\"btn btn-default\" type=\"submit\" ><a href=\"index\" style=\"text-decoration: none; color: #FFF;\">Continue shopping</a> <i class=\"fa fa-shopping-cart\"></i></button>\n");
-      out.write("                            <button href=\"#addEmployeeModal\"  data-toggle=\"modal\" class=\"btn btn-primary\" ><i class=\"fa fa-plus\"></i> Add product</button>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                    <!-- END CONTENT -->\n");
@@ -154,7 +153,7 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
       out.write("                <div id=\"addEmployeeModal\" class=\"modal fade\">\n");
       out.write("                    <div class=\"modal-dialog\">\n");
       out.write("                        <div class=\"modal-content\">\n");
-      out.write("                            <form action=\"add\" method=\"post\">\n");
+      out.write("                            <form action=\"add\" method=\"post\" enctype=\"multipart/form-data\">\n");
       out.write("                                <div class=\"modal-header\" style=\"background: #e94d1c; color: #FFF\">\t\t\t\t\t\t\n");
       out.write("                                    <h4 class=\"modal-title\">Add Product</h4>\n");
       out.write("                                </div>\n");
@@ -187,7 +186,15 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
         return;
       out.write("\n");
       out.write("                                        </select>\n");
+      out.write("                                        <label>Brand</label>\n");
+      out.write("                                        <select name=\"brand\" class=\"form-select\" >\n");
+      out.write("                                            ");
+      if (_jspx_meth_c_forEach_2(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                        </select>\n");
       out.write("                                    </div>\n");
+      out.write("\n");
       out.write("\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"modal-footer\">\n");
@@ -286,9 +293,9 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
           out.write("</strong>\n");
           out.write("                                                </td>\n");
           out.write("                                                <td class=\"goods-page-image\">\n");
-          out.write("                                                    <a href=\"");
+          out.write("                                                    <a href=\"image/");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.image}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\"><img src=\"");
+          out.write("\"><img src=\"image/");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.image}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("\" alt=\"Berry Lace Dress\"></a>\n");
           out.write("                                                </td>\n");
@@ -320,7 +327,6 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("\"  data-toggle=\"modal\"><i class=\"del-goods\" data-toggle=\"tooltip\" title=\"Delete\"></i></a>\n");
           out.write("                                                </td>\n");
-          out.write("\n");
           out.write("                                            </tr>\n");
           out.write("                                        ");
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
@@ -380,6 +386,48 @@ public final class shop_002dmanager_002dproduct_jsp extends org.apache.jasper.ru
     } finally {
       _jspx_th_c_forEach_1.doFinally();
       _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_1);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_2(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_2 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_2.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_2.setParent(null);
+    _jspx_th_c_forEach_2.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listbrand}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_2.setVar("o");
+    int[] _jspx_push_body_count_c_forEach_2 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_2 = _jspx_th_c_forEach_2.doStartTag();
+      if (_jspx_eval_c_forEach_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("                                                <option value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.Brand_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write('"');
+          out.write('>');
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.Brand_name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</option>\n");
+          out.write("                                            ");
+          int evalDoAfterBody = _jspx_th_c_forEach_2.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_2[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_2.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_2.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_2);
     }
     return false;
   }

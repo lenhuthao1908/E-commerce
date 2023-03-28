@@ -30,7 +30,6 @@ import javax.servlet.http.HttpSession;
 public class CheckoutControl extends HttpServlet {
 
 //    public static List<Cart> listcart = new ArrayList<>();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,17 +41,18 @@ public class CheckoutControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String orname = request.getParameter("name");
-        String action = request.getParameter("action");
-        String orphone = request.getParameter("phone");
-        String orcity = request.getParameter("city");
-        String oraddress1 = request.getParameter("address");
-        
-        
-        listcart.removeAll(listcart);
-        
-        response.sendRedirect("index");
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        if(acc == null){
+            response.sendRedirect("shop-login-and-signup.jsp");
+        }else{
+            // xu ly bill & billdetail
+            
+            response.sendRedirect("shop-checkout.jsp");
+        }
+
+//        listcart.removeAll(listcart);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

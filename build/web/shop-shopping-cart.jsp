@@ -97,7 +97,7 @@
                                         <%
                                             for (int i = 0; i < AddCartControl.listcart.size(); i++) {
                                                 Cart cart = AddCartControl.listcart.get(i);
-                                                ship = 30;
+                                                ship = 30.000;
                                                 total = total + (cart.getQuantity() * cart.getCid().getPrice());
                                         %>
                                         <tr>
@@ -134,9 +134,6 @@
                                             <td class="del-goods-col">
                                                 <a class="" href="delcart?action=DelCartP&code=<%= cart.getCid().getId()%>"><i class="fa fa-trash"></i></a>
                                             </td>
-                                            <!--                                            <td class="goods-page-price">
-                                                                                            <strong>${sessionScope.list.id}</strong>
-                                                                                        </td>-->
                                         </tr>
 
                                         <%
@@ -172,7 +169,8 @@
 
                             </div>
                             <button class="btn btn-default" type="submit" ><a href="index" style="text-decoration: none; color: #FFF;">Continue shopping</a> <i class="fa fa-shopping-cart"></i></button>
-                            <button href="#checkoutEmployeeModal" data-toggle="modal" class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button>
+                            <!--<button data-toggle="modal" class="btn btn-primary" type="submit"><a  href="checkout">Checkout <i class="fa fa-check"></i></a></button>-->
+                            <a href="checkout"><button data-toggle="modal" class="btn btn-primary">Checkout <i class="fa fa-check"></i></button></a>
                         </div>
                     </div>
                     <!-- END CONTENT -->
@@ -180,7 +178,7 @@
                 <!-- END SIDEBAR & CONTENT -->
 
                 <!-- add Modal HTML -->
-                <div id="checkoutEmployeeModal" class="modal fade">
+<!--                <div id="checkoutEmployeeModal" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form action="checkout" method="post">
@@ -273,12 +271,12 @@
 
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">
-                                    <a href="checkout"><input type="submit" class="btn btn-primary" value="Checkout"></a>
+                                    <a href="//checkout"><input type="submit" class="btn btn-primary" value="Checkout"></a>
                                 </div>
                             </form>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 

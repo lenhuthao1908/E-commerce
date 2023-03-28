@@ -77,44 +77,44 @@
                         <li><a href="home">Home</a></li>
                         <li><a href="index">Store</a></li>
                         <li class="active">${o.name}</li>
-                    </ul>
-                    <!-- BEGIN SIDEBAR & CONTENT -->
-                    <div class="row margin-bottom-40">
-                        <!-- BEGIN SIDEBAR -->
-                        <div class="sidebar col-md-3 col-sm-5">
+                </ul>
+                <!-- BEGIN SIDEBAR & CONTENT -->
+                <div class="row margin-bottom-40">
+                    <!-- BEGIN SIDEBAR -->
+                    <div class="sidebar col-md-3 col-sm-5">
 
                         <jsp:include page="shop-menu.jsp"></jsp:include>
 
                             <div class="sidebar-products clearfix">
                             <jsp:include page="shop-product-new.jsp"></jsp:include>
+                            </div>
                         </div>
-                    </div>
-                    <!-- END SIDEBAR -->
+                        <!-- END SIDEBAR -->
 
-                    <!-- BEGIN CONTENT -->
-                    <div class="col-md-9 col-sm-7">
+                        <!-- BEGIN CONTENT -->
                         <div class="col-md-9 col-sm-7">
-                            <div class="content-search margin-bottom-20">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h1>Search result for <em>shoes</em></h1>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form action="search" method="post">
-                                            <div class="input-group">
-                                                <input name="txt" type="text" placeholder="Search again" class="form-control">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-primary" type="submit">Search</button>
-                                                </span>
-                                            </div>
-                                        </form>
+                            <div class="col-md-9 col-sm-7">
+                                <div class="content-search margin-bottom-20">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h1>Search result for <em>Shopping</em></h1>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="search" method="post">
+                                                <div class="input-group">
+                                                    <input name="txt" type="text" placeholder="Search again" class="form-control">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary" type="submit">Search</button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
+                                <p><b>PRODUCT</b></p> 
                             </div>
-                            <p><b>PRODUCT</b></p> 
-                        </div>
-                        <!-- BEGIN PRODUCT LIST -->
-                        <div class="row product-list">
+                            <!-- BEGIN PRODUCT LIST -->
+                            <div class="row product-list">
                             <c:forEach items="${listP}" var="o">
                                 <!-- PRODUCT ITEM START -->
                                 <div class="col-md-4 col-sm-6 col-xs-12">
@@ -137,17 +137,14 @@
                         <!-- END PRODUCT LIST -->
                         <!-- BEGIN PAGINATOR -->
                         <div class="row">
-                            <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
-                            <div class="col-md-8 col-sm-8">
-                                <ul class="pagination pull-right">
-                                    <li><a href="javascript:;">&laquo;</a></li>
-                                    <li><a href="javascript:;">1</a></li>
-                                    <li><span>2</span></li>
-                                    <li><a href="javascript:;">3</a></li>
-                                    <li><a href="javascript:;">4</a></li>
-                                    <li><a href="javascript:;">5</a></li>
-                                    <li><a href="javascript:;">&raquo;</a></li>
-                                </ul>
+                            <!--<div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>-->
+                            <div class="col-md-8 col-sm-8 pull-right">
+                                <c:forEach begin="1" end="${endP}" var="i">
+                                    <ul class="pagination">
+                                        <li><a style="font-weight: 900;" href="index?page=${i}">${i}</a></li>
+                                    </ul>
+                                </c:forEach>
+
                             </div>
                         </div>
                         <!-- END PAGINATOR -->

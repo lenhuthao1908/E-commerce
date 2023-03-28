@@ -4,6 +4,10 @@
     Author     : nhuth
 --%>
 
+<%@page import="entity.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.DAO"%>
+<%@page import="entity.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -71,6 +75,7 @@
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
                             <h1>Category product</h1>
+                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add Category</button>
                             <div class="goods-page">
                                 <div class="goods-data clearfix">
                                     <div class="table-wrapper-responsive">
@@ -78,10 +83,42 @@
                                             <tr>
                                                 <th class="goods-page-pass"><strong>CID</strong></th>
                                                 <th class="goods-page-pass"><strong>CNAME</strong></th>
+                                                <th class="" ><strong>EDIT</strong></th>
+                                                <th class="" ></th>
                                             </tr>
+                                        <%
+                                            Account a = (Account) session.getAttribute("acc");
+                                            DAO dao = new DAO();
+                                            List<Category> list = dao.getAllCategory();
 
+                                            for (int i = list.size()-1; i >= 0; i--) {
+                                                Category category = list.get(i);
+                                        %>
+                                        <tr>
+                                            <td class="goods-page-cid">
+                                                <strong><%= category.getCid()%></strong>
+                                            </td>
+                                            <td class="goods-page-cname">
+                                                <strong><%= category.getCname()%></strong>
+                                            </td>
+
+                                            <td class="edit-goods-col">
+                                                <a href="loadcc?cid=<%= category.getCid()%>"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
+                                            </td> 
+                                            <td class="del-goods-col">
+                                                <a href="delcc?cid=<%= category.getCid()%>"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
+                                            </td>
+
+                                        </tr>
+
+                                        <%
+                                            }
+                                        %>
+
+                                        <%-- 
+                                        
                                         <c:forEach items="${listCC}" var="o">
-                                             <tr>
+                                            <tr>
                                                 <td class="goods-page-cid">
                                                     <strong>${o.cid}</strong>
                                                 </td>
@@ -98,14 +135,10 @@
 
                                             </tr>
                                         </c:forEach>
-                                           
-                                            
-
+                                        --%>
                                     </table>
                                 </div>
                             </div>
-                            <button class="btn btn-default" type="submit" ><a href="index" style="text-decoration: none; color: #FFF;">Continue shopping</a> <i class="fa fa-shopping-cart"></i></button>
-                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add Category</button>
                         </div>
                     </div>
                     <!-- END CONTENT -->
@@ -127,7 +160,7 @@
                                         <label>Category Name</label>
                                         <input name="cname" type="text" class="form-control" required>
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="modal-footer">
@@ -138,11 +171,11 @@
                         </div>
                     </div>
                 </div>
-                
-                
 
 
-                
+
+
+
 
 
 

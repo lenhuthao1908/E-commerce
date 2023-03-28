@@ -35,18 +35,22 @@ public class AddAcountControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         request.setCharacterEncoding("UTF-8");
         String auser = request.getParameter("username");
         String apass = request.getParameter("password");
         int asell = Integer.parseInt(request.getParameter("sell"));
         int aadmin = Integer.parseInt(request.getParameter("admin"));
-        String afullname  = request.getParameter("fullname");
+        String afullname = request.getParameter("fullname");
         int aphone = Integer.parseInt(request.getParameter("phone"));
-        String aaddress = request.getParameter("address");
-        
+        String acity = request.getParameter("city");
+        String adistrict = request.getParameter("district");
+        String award = request.getParameter("ward");
+
         DAO dao = new DAO();
-        dao.insertAccount(auser, apass, asell, aadmin, afullname, aphone, aaddress);
+        dao.insertAccount(auser, apass, asell, aadmin, afullname, aphone, acity, adistrict, award);
         response.sendRedirect("manageracc");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

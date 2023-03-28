@@ -26,13 +26,19 @@
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-5 col-sm-5 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
+                    <li class="dropdown dropdown-megamenu">
+                        <a class="dropdown-toggle"  href="index">
+                            PRODUCT
+                        </a>
+                    </li>
                     <c:if test="${sessionScope.acc != null}">
                         <li><a href="shop-account.jsp"><i class="fa fa-user"></i>${sessionScope.acc.user}</a></li>
                         <li><a href="logout">LOGOUT</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.acc == null}">
+                        </c:if>
+                        <c:if test="${sessionScope.acc == null}">
                         <li><a href="shop-login-and-signup.jsp">LOGIN</a></li>
                         </c:if>
+
 
                 </ul>
             </div>
@@ -45,7 +51,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="home"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="home"><img src="assets/corporate/img/logos/NF--SHOP.png" alt="NF--Shop UI" > </a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -56,7 +62,7 @@
         <!-- BEGIN CART -->
         <div class="top-cart-block">
             <div class="top-cart-info">
-                <a href="shop-shopping-cart.jsp" class="top-cart-info-count"> <%= count  %> items</a>
+                <a href="shop-shopping-cart.jsp" class="top-cart-info-count"> <%= count%> items</a>
             </div>
             <i class="fa fa-shopping-cart"></i>
 
@@ -72,17 +78,17 @@
                             <a href="detail?pid=<%=cart.getCid().getId()%>"><img src="image/<%=cart.getCid().getImage()%>" width="37" height="34"></a>
                             <span class="cart-content-count">x<%=cart.getQuantity()%></span>
                             <strong><a href="detail?pid=<%=cart.getCid().getId()%>"><%=cart.getCid().getName()%></a></strong>
-                            <em><%= cart.getCid().getPrice()*cart.getQuantity()%></em>
+                            <em><%= cart.getCid().getPrice() * cart.getQuantity()%></em>
                         </li>
                         <%
                             }
                         %>
 
                     </ul>
-<!--                    <div class="text-right">
-                        <a href="shop-shopping-cart.jsp" class="btn btn-default">View Cart</a>
-                        <a href="shop-checkout.jsp" class="btn btn-primary">Checkout</a>
-                    </div>-->
+                    <!--                    <div class="text-right">
+                                            <a href="shop-shopping-cart.jsp" class="btn btn-default">View Cart</a>
+                                            <a href="shop-checkout.jsp" class="btn btn-primary">Checkout</a>
+                                        </div>-->
                 </div>
             </div>
 
@@ -95,20 +101,17 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation">
             <ul>
-                <li class="dropdown">
-                    <a class="dropdown-toggle"  href="home">
-                        HOME   
-                    </a>
-                </li>
-                <li class="dropdown dropdown-megamenu">
-                    <a class="dropdown-toggle"  href="index">
-                        PRODUCT
-                    </a>
-                </li>
+                <!--                <li class="dropdown">
+                                    <a class="dropdown-toggle"  href="home">
+                                        HOME   
+                                    </a>
+                                </li>-->
+
+
                 <li class="dropdown dropdown100 nav-catalogue">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        SALE PRODUCT
-                    </a>
+                    <!--                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                                            SALE PRODUCT
+                                        </a>-->
                     <ul class="dropdown-menu">
                         <li>
                             <div class="header-navigation-content">
@@ -140,6 +143,7 @@
                 <c:if test="${sessionScope.acc.isAdmin == 1 }">
                     <li><a href="manageracc">Manager Admin</a></li>
                     <li><a href="managercc">Manager Category</a></li>
+                    <li><a href="managerorderbill">Manager Bill</a></li>
                     </c:if>
 
                 <!-- BEGIN TOP SEARCH

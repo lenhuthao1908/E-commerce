@@ -36,6 +36,7 @@ public class SignupControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try {
             request.setCharacterEncoding("UTF-8");
             String user = request.getParameter("user");
@@ -43,7 +44,9 @@ public class SignupControl extends HttpServlet {
             String repass = request.getParameter("repass");
             String fullname = request.getParameter("fullname");
             String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
+            String city = request.getParameter("city");
+            String district = request.getParameter("district");
+            String ward = request.getParameter("ward");
 //        
             if (!pass.equals(repass)) {
                 response.sendRedirect("shop-login-and-signup.jsp");
@@ -54,7 +57,7 @@ public class SignupControl extends HttpServlet {
                 Account lg = dao.login(user, pass);
                 if (sgp == null) {
                     //success
-                    dao.singup(user, pass, fullname, Integer.parseInt(phone), address);
+                    dao.singup(user, pass, fullname, Integer.parseInt(phone),city,district, ward);
                     response.sendRedirect("shop-login-and-signup.jsp");
                 } else {
                     //fail

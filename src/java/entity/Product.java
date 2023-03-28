@@ -16,9 +16,16 @@ public class Product {
     private double price;
     private String title;
     private String description;
-    private int amount = 0;
 
     public Product() {
+    }
+
+    public Product(String name, String image, double price, String title, String description) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.title = title;
+        this.description = description;
     }
 
     public Product(int id, String name, String image, double price, String title, String description) {
@@ -29,25 +36,6 @@ public class Product {
         this.title = title;
         this.description = description;
     }
-
-    public Product(int id, String name, String image, double price, String title, String description, int amount) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.price = price;
-        this.title = title;
-        this.description = description;
-        this.amount = amount;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-    
 
     public int getId() {
         return id;
@@ -101,5 +89,8 @@ public class Product {
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", image=" + image + ", price=" + price + ", title=" + title + ", description=" + description + '}';
     }
+    
+
+    
     
 }

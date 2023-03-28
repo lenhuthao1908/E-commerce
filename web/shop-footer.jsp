@@ -7,24 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- BEGIN BRANDS -->
-    <div class="brands">
-      <div class="container">
-            <div class="owl-carousel owl-carousel6-brands">
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/canon.jpg" alt="canon" title="canon"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/esprit.jpg" alt="esprit" title="esprit"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/gap.jpg" alt="gap" title="gap"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/next.jpg" alt="next" title="next"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/puma.jpg" alt="puma" title="puma"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/zara.jpg" alt="zara" title="zara"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/canon.jpg" alt="canon" title="canon"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/esprit.jpg" alt="esprit" title="esprit"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/gap.jpg" alt="gap" title="gap"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/next.jpg" alt="next" title="next"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/puma.jpg" alt="puma" title="puma"></a>
-              <a href="shop-product-list.html"><img src="assets/pages/img/brands/zara.jpg" alt="zara" title="zara"></a>
-            </div>
-        </div>
-    </div>
+    
     <!-- END BRANDS -->
 
     <!-- BEGIN STEPS -->
@@ -34,8 +17,8 @@
           <div class="col-md-4 steps-block-col">
             <i class="fa fa-truck"></i>
             <div>
-              <h2>Free shipping</h2>
-              <em>Express delivery withing 3 days</em>
+              <h2>Fast delivery</h2>
+              <em>Express delivery within 3 days</em>
             </div>
             <span>&nbsp;</span>
           </div>
@@ -50,8 +33,8 @@
           <div class="col-md-4 steps-block-col">
             <i class="fa fa-phone"></i>
             <div>
-              <h2>477 505 8877</h2>
-              <em>24/7 customer care available</em>
+              <h2>012 345 6789</h2>
+              <em>24/7 Online Support</em>
             </div>
           </div>
         </div>
@@ -87,7 +70,7 @@
             <address class="margin-bottom-40">
               51, Ninh Kiều, Cần Thơ<br>
               Phone: 036 339 528<br>
-              Email: <a href="haob1906661@student.ctu.edu.vn">haob1906661@student.ctu.edu.vn</a><br>
+              Email: <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=DmwnWsmCLcsrnnsSbpQscHRWrwZCnCPBGcDLzqddqGhDnzQqXMcNtDMhZCVLFdllGJmlpcjHhFhv">haob1906661@student.ctu.edu.vn</a><br>
             </address>
           </div>
           <!-- END BOTTOM CONTACTS -->

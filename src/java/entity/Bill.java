@@ -5,7 +5,6 @@
  */
 package entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -13,140 +12,138 @@ import java.util.Date;
  * @author nhuth
  */
 public class Bill {
-    private int bId;
-    private int uId;
-    private int pId;
-    private String uname;
-    private String bname;
-    private int bphone;
-    private String baddress;
-    private String bcity;
-    private Timestamp time;
-    
-    private double total;
-    private String pname;
-    private int quantity;
+    private int Bill_id;
+    private int acc_id;
+    private String fullname;
+    private int Total;
+    private int Phone1;
+    private int Phone2;
+    private String City;
+    private String District;
+    private String Ward;
+    private String Desbill;
+    private Date date;
+    private int status;
 
     public Bill() {
     }
 
-    public Bill(int bId, int uId, int pId, String uname, String bname, int bphone, String baddress, String bcity, Timestamp time, double total, String pname, int quantity) {
-        this.bId = bId;
-        this.uId = uId;
-        this.pId = pId;
-        this.uname = uname;
-        this.bname = bname;
-        this.bphone = bphone;
-        this.baddress = baddress;
-        this.bcity = bcity;
-        this.time = time;
-        this.total = total;
-        this.pname = pname;
-        this.quantity = quantity;
+    public Bill(int Bill_id, int acc_id, String fullname, int Total, int Phone1, int Phone2, String City, String District, String Ward, String Desbill, Date date, int status) {
+        this.Bill_id = Bill_id;
+        this.acc_id = acc_id;
+        this.fullname = fullname;
+        this.Total = Total;
+        this.Phone1 = Phone1;
+        this.Phone2 = Phone2;
+        this.City = City;
+        this.District = District;
+        this.Ward = Ward;
+        this.Desbill = Desbill;
+        this.date = date;
+        this.status = status;
     }
 
-    public int getbId() {
-        return bId;
+    public int getBill_id() {
+        return Bill_id;
     }
 
-    public void setbId(int bId) {
-        this.bId = bId;
+    public void setBill_id(int Bill_id) {
+        this.Bill_id = Bill_id;
     }
 
-    public int getuId() {
-        return uId;
+    public int getAcc_id() {
+        return acc_id;
     }
 
-    public void setuId(int uId) {
-        this.uId = uId;
+    public void setAcc_id(int acc_id) {
+        this.acc_id = acc_id;
     }
 
-    public int getpId() {
-        return pId;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setpId(int pId) {
-        this.pId = pId;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getUname() {
-        return uname;
+    public int getTotal() {
+        return Total;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setTotal(int Total) {
+        this.Total = Total;
     }
 
-    public String getBname() {
-        return bname;
+    public int getPhone1() {
+        return Phone1;
     }
 
-    public void setBname(String bname) {
-        this.bname = bname;
+    public void setPhone1(int Phone1) {
+        this.Phone1 = Phone1;
     }
 
-    public int getBphone() {
-        return bphone;
+    public int getPhone2() {
+        return Phone2;
     }
 
-    public void setBphone(int bphone) {
-        this.bphone = bphone;
+    public void setPhone2(int Phone2) {
+        this.Phone2 = Phone2;
     }
 
-    public String getBaddress() {
-        return baddress;
+    public String getCity() {
+        return City;
     }
 
-    public void setBaddress(String baddress) {
-        this.baddress = baddress;
+    public void setCity(String City) {
+        this.City = City;
     }
 
-    public String getBcity() {
-        return bcity;
+    public String getDistrict() {
+        return District;
     }
 
-    public void setBcity(String bcity) {
-        this.bcity = bcity;
+    public void setDistrict(String District) {
+        this.District = District;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public String getWard() {
+        return Ward;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setWard(String Ward) {
+        this.Ward = Ward;
     }
 
-    public double getTotal() {
-        return total;
+    public String getDesbill() {
+        return Desbill;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setDesbill(String Desbill) {
+        this.Desbill = Desbill;
     }
 
-    public String getPname() {
-        return pname;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStatus() {
+        return status;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
+    
     @Override
     public String toString() {
-        return "Bill{" + "bId=" + bId + ", uId=" + uId + ", pId=" + pId + ", uname=" + uname + ", bname=" + bname + ", bphone=" + bphone + ", baddress=" + baddress + ", bcity=" + bcity + ", time=" + time + ", total=" + total + ", pname=" + pname + ", quantity=" + quantity + '}';
+        return "Bill{" + "Bill_id=" + Bill_id + ", fullname=" + fullname + ", Total=" + Total + ", Phone1=" + Phone1 + ", Phone2=" + Phone2 + ", City=" + City + ", District=" + District + ", Ward=" + Ward + ", Desbill=" + Desbill + ", date=" + date + ", status=" + status + '}';
     }
 
     
-    
-   
 }

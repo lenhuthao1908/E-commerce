@@ -4,6 +4,9 @@
     Author     : nhuth
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="dao.DAO"%>
+<%@page import="entity.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -70,6 +73,7 @@
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
                             <h1>Account product</h1>
+                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add Account</button>
                             <div class="goods-page">
                                 <div class="goods-data clearfix">
                                     <div class="table-wrapper-responsive">
@@ -79,8 +83,53 @@
                                                 <th class="goods-page-pass"><strong>PASSWORD</strong></th>
                                                 <th class="goods-page-issel"><strong>SELLSTRATORS</strong></th>
                                                 <th class="goods-page-admin"><strong>ADMINISTRATORS</strong></th>
+                                                <th class=""><strong>EDIT</strong></th>
+                                                <th class=""></th>
                                             </tr>
+                                        <%
+                                            Account a = (Account) session.getAttribute("acc");
+                                            DAO dao = new DAO();
+                                            List<Account> list = dao.getAllAccount();
 
+                                            for (int i = list.size() - 1; i >= 0; i--) {
+                                                Account acc = list.get(i);
+                                        %>
+                                        <tr>
+                                            <td class="goods-page-user">
+                                                <strong><%=acc.getUser()%></strong>
+                                            </td>
+                                            <td class="goods-page-pass">
+                                                <strong><%=acc.getPass()%></strong>
+                                            </td>
+                                            <td class="goods-page-issel">
+                                                <c:if test="<%=acc.getIsSell() == 1%>">
+                                                    <strong style="color: lime;">YES</strong>
+                                                </c:if>
+                                                <c:if test="<%=acc.getIsSell() == 0%>">
+                                                    <strong style="color: blue;">NO</strong>
+                                                </c:if>
+                                            </td>
+                                            <td class="goods-page-admin">
+                                                <c:if test="<%=acc.getIsAdmin() == 1%>">
+                                                    <strong style="color: lime;">YES</strong>
+                                                </c:if>
+                                                <c:if test="<%=acc.getIsAdmin() == 0%>">
+                                                    <strong style="color: blue;">NO</strong>
+                                                </c:if>
+                                            </td>
+
+                                            <td class="edit-goods-col">
+                                                <a href="loadaccount?aid=<%=acc.getId()%>"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
+                                            </td> 
+                                            <td class="del-goods-col">
+                                                <a href="deleteacc?aid=<%=acc.getId()%>"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
+                                            </td>
+
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                        <%--
                                         <c:forEach items="${listA}" var="o">
                                             <tr>
                                                 <td class="goods-page-user">
@@ -115,12 +164,12 @@
 
                                             </tr>
                                         </c:forEach>
+                                        --%>
+
 
                                     </table>
                                 </div>
                             </div>
-                            <button class="btn btn-default" type="submit" ><a href="index" style="text-decoration: none; color: #FFF;">Continue shopping</a> <i class="fa fa-shopping-cart"></i></button>
-                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add Account</button>
                         </div>
                     </div>
                     <!-- END CONTENT -->
@@ -156,7 +205,7 @@
                                         <input name="admin" type="radio" value="0" class="form-group"> NO
                                         <br>
                                         <input name="admin" type="radio" value="1" class="form-group"> YES
-                                               
+
                                     </div>
                                     <div class="form-group">
                                         <label>Fullname</label>
@@ -167,9 +216,18 @@
                                         <input name="phone" type="tel" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <input name="address" type="text" class="form-control" required>
-                                    </div>
+                                        <select class="form-group" id="city" name="city">
+                                            <option class="form-control" value="" selected>Chọn tỉnh thành</option>           
+                                        </select>
+                                        <br>
+                                        <select class="form-group" id="district" name="district">
+                                            <option class="form-control" value="" selected>Chọn quận huyện</option>
+                                        </select>
+                                        <br>
+                                        <select class="form-group" id="ward" name="ward">
+                                            <option class="form-control" value="" selected>Chọn phường xã</option>
+                                        </select>
+                                    </div> 
 
                                 </div>
                                 <div class="modal-footer">
@@ -183,7 +241,7 @@
 
 
 
-                
+
 
 
 
@@ -226,6 +284,61 @@
             });
         </script>
         <!-- END PAGE LEVEL JAVASCRIPTS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <script>
+            var citis = document.getElementById("city");
+            var districts = document.getElementById("district");
+            var wards = document.getElementById("ward");
+            var Parameter = {
+                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                method: "GET",
+                responseType: "application/json",
+            };
+            var promise = axios(Parameter);
+            promise.then(function (result) {
+                renderCity(result.data);
+            });
+
+            function renderCity(data) {
+                for (const x of data) {
+                    var opt = document.createElement('option');
+                    opt.value = x.Name;
+                    opt.text = x.Name;
+                    opt.setAttribute('data-id', x.Id);
+                    citis.options.add(opt);
+                }
+                citis.onchange = function () {
+                    district.length = 1;
+                    ward.length = 1;
+                    if (this.options[this.selectedIndex].dataset.id != "") {
+                        const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+                        for (const k of result[0].Districts) {
+                            var opt = document.createElement('option');
+                            opt.value = k.Name;
+                            opt.text = k.Name;
+                            opt.setAttribute('data-id', k.Id);
+                            district.options.add(opt);
+                        }
+                    }
+                };
+                district.onchange = function () {
+                    ward.length = 1;
+                    const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+                    if (this.options[this.selectedIndex].dataset.id != "") {
+                        const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex].dataset.id)[0].Wards;
+
+                        for (const w of dataWards) {
+                            var opt = document.createElement('option');
+                            opt.value = w.Name;
+                            opt.text = w.Name;
+                            opt.setAttribute('data-id', w.Id);
+                            wards.options.add(opt);
+                        }
+                    }
+                };
+            }
+        </script>
     </body>
     <!-- END BODY -->
 </html>

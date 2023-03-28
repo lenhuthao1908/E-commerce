@@ -17,12 +17,14 @@ public class Account {
     private int isAdmin;
     private String fullname;
     private int phone;
-    private String address;
+    private String City;
+    private String District;
+    private String Ward;
 
     public Account() {
     }
 
-    public Account(int id, String user, String pass, int isSell, int isAdmin, String fullname, int phone, String address) {
+    public Account(int id, String user, String pass, int isSell, int isAdmin, String fullname, int phone, String City, String District, String Ward) {
         this.id = id;
         this.user = user;
         this.pass = pass;
@@ -30,7 +32,9 @@ public class Account {
         this.isAdmin = isAdmin;
         this.fullname = fullname;
         this.phone = phone;
-        this.address = address;
+        this.City = City;
+        this.District = District;
+        this.Ward = Ward;
     }
 
     public int getId() {
@@ -89,19 +93,36 @@ public class Account {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return City;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String City) {
+        this.City = City;
+    }
+
+    public String getDistrict() {
+        return District;
+    }
+
+    public void setDistrict(String District) {
+        this.District = District;
+    }
+
+    public String getWard() {
+        return Ward;
+    }
+
+    public void setWard(String Ward) {
+        this.Ward = Ward;
     }
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", isSell=" + isSell + ", isAdmin=" + isAdmin + ", fullname=" + fullname + ", phone=" + phone + ", address=" + address + '}';
+        return "Account{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", isSell=" + isSell + ", isAdmin=" + isAdmin + ", fullname=" + fullname + ", phone=" + phone + ", City=" + City + ", District=" + District + ", Ward=" + Ward + '}';
     }
 
+    
     
 
     

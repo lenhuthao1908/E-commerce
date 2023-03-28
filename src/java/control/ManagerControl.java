@@ -7,6 +7,7 @@ package control;
 
 import dao.DAO;
 import entity.Account;
+import entity.Brand;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
@@ -44,8 +45,9 @@ public class ManagerControl extends HttpServlet {
         DAO dao = new DAO();
         List<Product> list = dao.getProductBySellID(id);
         List<Category> listC = dao.getAllCategory();
+        List<Brand> listB = dao.getAllBrand();
         
-        
+        request.setAttribute("listB", listB);
         request.setAttribute("listCC", listC);
         request.setAttribute("listP", list);
         request.getRequestDispatcher("shop-manager-product.jsp").forward(request, response);

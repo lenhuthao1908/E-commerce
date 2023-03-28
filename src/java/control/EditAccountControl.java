@@ -33,17 +33,20 @@ public class EditAccountControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         int aid = Integer.parseInt(request.getParameter("id"));
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         String fullname = request.getParameter("fullname");
         int phone = Integer.parseInt(request.getParameter("phone"));
-        String address = request.getParameter("address");
+        String city = request.getParameter("city");
+        String district = request.getParameter("district");
+        String ward = request.getParameter("ward");
         int sell = Integer.parseInt(request.getParameter("sell"));
         int admin = Integer.parseInt(request.getParameter("admin"));
         
         DAO dao = new DAO();
-        dao.editAccount(user, pass, sell, admin, fullname, phone, address, aid);
+        dao.editAccount(user, pass, sell, admin, fullname, phone, city, district, ward, aid);
         response.sendRedirect("manageracc");
         
     }

@@ -6,6 +6,7 @@
 package control;
 
 import dao.DAO;
+import entity.Brand;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
@@ -45,10 +46,12 @@ public class HomeControl extends HttpServlet {
         List<Product> top5lastP = dao.getTop5Last();
         List<Product> top2lastP = dao.getTop2Last();
         List<Product> top4lastP = dao.getTop4Lowprice();
+        List<Brand> listB = dao.getAllBrand();
         
         
         //b2: set data to jsp
 //        request.setAttribute("listP", list);
+        request.setAttribute("listB", listB);
         request.setAttribute("listCC", listC);
         request.setAttribute("p3l", top3lastP);
         request.setAttribute("p2l", top2lastP);

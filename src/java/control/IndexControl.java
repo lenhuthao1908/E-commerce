@@ -6,6 +6,7 @@
 package control;
 
 import dao.DAO;
+import entity.Brand;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
@@ -37,23 +38,37 @@ public class IndexControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //b1: get data from dao
+        String indexPage = request.getParameter("page");
+        if(indexPage == null){
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+        
+        
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
+//        List<Product> list = dao.getAllProduct();
         List<Category> listC = dao.getAllCategory();
         List<Product> top3lastP = dao.getTop3Last();
         List<Product> top4lastP = dao.getTop4Lowprice();
-
+        List<Brand> listB = dao.getAllBrand();
+        int count = dao.getCountProduct();
+        int endPage = count / 6;
+        if (count % 6 != 0) {
+            endPage++;
+        }
+        List<Product> list = dao.paggingProduct(index);
+        
+        
         //b2: set data to jsp
+//        request.setAttribute("listpage", indexPage);
+        request.setAttribute("endP", endPage);
         request.setAttribute("listP", list);
+        request.setAttribute("listB", listB);
         request.setAttribute("listCC", listC);
         request.setAttribute("p3l", top3lastP);
         request.setAttribute("p4l", top4lastP);
-
-        try {
-            request.getRequestDispatcher("shop-product-list.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.getRequestDispatcher("home").forward(request, response);
-        }
+        request.getRequestDispatcher("shop-product-list.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

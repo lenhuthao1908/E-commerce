@@ -78,7 +78,7 @@ public class AddControl extends HttpServlet {
             }
             DAO dao = new DAO();
             dao.insertProduct(pname, fileName, pprice, ptitle, pdescription, pcategory, sid);
-            request.getRequestDispatcher("manager").forward(request, response);
+            response.sendRedirect("manager");
 
 //            writer.println("New file " + fileName + " created at " + "C:\\Users\\nhuth\\OneDrive\\Documents\\NetBeansProjects\\video_1\\Project_banhang\\web\\image");
 //            LOGGER.log(Level.INFO, "File {0} being uploaded to {1}",

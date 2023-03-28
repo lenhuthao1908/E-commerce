@@ -46,7 +46,7 @@ public class LoginControl extends HttpServlet {
         }else{
             HttpSession session = request.getSession();
             session.setAttribute("acc", lg);
-//            session.setMaxInactiveInterval(10); set time logout
+            session.setMaxInactiveInterval(60*60); //set time logout (60*60*2)= 2 hours
             response.sendRedirect("home"); //chuyển trang không đem dữ liệu
 //            request.getRequestDispatcher("home").forward(request, response);
 //            request chuyển trang đẩy dữ liệu lên

@@ -51,9 +51,8 @@ public class AddCartControl extends HttpServlet {
                 case "AddCart":
                     code = request.getParameter("code");
                     z = dao.getProductByID(code);
-                    Product p = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription(), z.getAmount());
+                    Product p = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
                     addtocart(p);
-                    session.setAttribute("list", p);
                     System.out.println("size:" + listcart.size());
                     response.sendRedirect("index");
                     break;
@@ -65,21 +64,23 @@ public class AddCartControl extends HttpServlet {
                 case "AddToCart":
                     code = request.getParameter("code");
                     z = dao.getProductByID(code);
-                    Product cp = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription(), z.getAmount());
+                    Product cp = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
                     addtocartoncart(cp);
                     response.sendRedirect("shop-shopping-cart.jsp");
                     break;
                 case "AddToCartOndetail":
                     code = request.getParameter("code");
+                    String link = "./detail?pid=" + code;
                     z = dao.getProductByID(code);
-                    Product detailcart = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription(), z.getAmount());
+                    Product detailcart = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
                     detailaddcart(detailcart);
-                    response.sendRedirect("shop-shopping-cart.jsp");
+                    
+                    response.sendRedirect(link);
                     break;
                 case "AddToCartOnHome":
                     code = request.getParameter("code");
                     z = dao.getProductByID(code);
-                    Product homecart = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription(), z.getAmount());
+                    Product homecart = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
                     hometocart(homecart);
                     response.sendRedirect("home");
                     break;

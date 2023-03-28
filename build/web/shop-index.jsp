@@ -80,66 +80,22 @@
                     <div class="carousel-inner" role="listbox">
                         <!-- First slide -->
                         <div class="item carousel-item-four active">
-                            <div class="container">
-                                <div class="carousel-position-four text-center">
-                                    <h2 class="margin-bottom-20 animate-delay carousel-title-v3 border-bottom-title text-uppercase" data-animation="animated fadeInDown">
-                                        Tones of <br/><span class="color-red-v2">Shop UI Features</span><br/> designed
-                                    </h2>
-                                    <p class="carousel-subtitle-v2" data-animation="animated fadeInUp">Lorem ipsum dolor sit amet constectetuer diam <br/>
-                                        adipiscing elit euismod ut laoreet dolore.</p>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         <!-- Second slide -->
                         <div class="item carousel-item-five">
-                            <div class="container">
-                                <div class="carousel-position-four text-center">
-                                    <h2 class="animate-delay carousel-title-v4" data-animation="animated fadeInDown">
-                                        Unlimted
-                                    </h2>
-                                    <p class="carousel-subtitle-v2" data-animation="animated fadeInDown">
-                                        Layout Options
-                                    </p>
-                                    <p class="carousel-subtitle-v3 margin-bottom-30" data-animation="animated fadeInUp">
-                                        Fully Responsive
-                                    </p>
-                                    <a class="carousel-btn" href="#" data-animation="animated fadeInUp">See More Details</a>
-                                </div>
-                                <img class="carousel-position-five animate-delay hidden-sm hidden-xs"  alt="Price" data-animation="animated zoomIn">
-                            </div>
+                            
                         </div>
 
                         <!-- Third slide -->
                         <div class="item carousel-item-six">
-                            <div class="container">
-                                <div class="carousel-position-four text-center">
-                                    <span class="carousel-subtitle-v3 margin-bottom-15" data-animation="animated fadeInDown">
-                                        Full Admin &amp; Frontend
-                                    </span>
-                                    <p class="carousel-subtitle-v4" data-animation="animated fadeInDown">
-                                        eCommerce UI
-                                    </p>
-                                    <p class="carousel-subtitle-v3" data-animation="animated fadeInDown">
-                                        Is Ready For Your Project
-                                    </p>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         <!-- Fourth slide -->
                         <div class="item carousel-item-seven">
-                            <div class="center-block">
-                                <div class="center-block-wrap">
-                                    <div class="center-block-body">
-                                        <h2 class="carousel-title-v1 margin-bottom-20" data-animation="animated fadeInDown">
-                                            The most <br/>
-                                            wanted bijouterie
-                                        </h2>
-                                        <a class="carousel-btn" href="#" data-animation="animated fadeInUp">But It Now!</a>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -160,7 +116,7 @@
                     <div class="row margin-bottom-40">
                         <!-- BEGIN SALE PRODUCT -->
                         <div class="col-md-12 sale-product">
-                            <h2>Chỉ từ 99.000đ</h2>
+                            <h2>Price lower 99.000</h2>
                             <div class="owl-carousel owl-carousel5">
 
                             <c:forEach items="${p5l}" var="o">
@@ -195,7 +151,7 @@
                         <!-- END SIDEBAR -->
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-9 col-sm-8 ">
-                            <h2>Sản phẩm mới</h2>
+                            <h2>Product new</h2>
                             <div class="owl-carousel owl-carousel3" >
                             <c:forEach items="${p3l}" var="o">
                                 <div class="product-item">
@@ -224,7 +180,7 @@
                 <div class="row margin-bottom-35 ">
                     <!-- BEGIN TWO PRODUCTS -->
                     <div class="col-md-6 two-items-bottom-items">
-                        <h2>Sản phẩm giá rẻ</h2>
+                        <h2>Price cheapest</h2>
                         <div class="owl-carousel owl-carousel2">
                                 <c:forEach items="${p2l}" var="o">
                                     <div class="product-item">

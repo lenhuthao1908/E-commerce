@@ -4,6 +4,13 @@
     Author     : nhuth
 --%>
 
+<%@page import="entity.Brand"%>
+<%@page import="entity.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.Product"%>
+<%@page import="dao.DAO"%>
+<%@page import="entity.Account"%>
+<%@page import="entity.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -57,7 +64,7 @@
         <link href="assets/corporate/css/custom.css" rel="stylesheet">        
         <link href="assets/pages/css/portfolio.css" rel="stylesheet">
 
-        
+
         <!-- Theme styles END -->
     </head>
     <!-- Head END -->
@@ -73,6 +80,7 @@
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
                             <h1>Manager product</h1>
+                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add product</button>
                             <div class="goods-page">
                                 <div class="goods-data clearfix">
                                     <div class="table-wrapper-responsive">
@@ -84,7 +92,44 @@
                                                 <th class="goods-page-ref-no bold"><strong>Title</strong></th>
                                                 <th class="goods-page-price bold"><strong>Price</strong></th>
                                             </tr>
+                                        <%
+                                            Account a = (Account) session.getAttribute("acc");
+                                            int id = a.getId();
+                                            DAO dao = new DAO();
+                                            List<Product> list = dao.getProductBySellID(id);
+                                            List<Category> listC = dao.getAllCategory();
+                                            List<Brand> listB = dao.getAllBrand();
 
+                                            for (int i = list.size() - 1; i >= 0; i--) {
+                                                Product product = list.get(i);
+                                        %>
+                                        <tr>
+                                            <td class="goods-page-id">
+                                                <strong><%= product.getId() %></strong>
+                                            </td>
+                                            <td class="goods-page-image">
+                                                <a href="image/<%= product.getImage()%>"><img src="image/<%= product.getImage()%>" alt="Berry Lace Dress"></a>
+                                            </td>
+                                            <td class="goods-page-description">
+                                                <p><%= product.getDescription()%></p>
+                                            </td>
+                                            <td>
+                                                <h3><a href="detail?pid=<%= product.getId()%>"><%= product.getName()%></a></h3>
+                                            </td>
+                                            <td class="goods-page-price">
+                                                <strong><%= product.getPrice()%></strong>
+                                            </td>
+                                            <td class="edit-goods-col">
+                                                <a href="loadproduct?pid=<%= product.getId()%>"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
+                                            </td> 
+                                            <td class="del-goods-col">
+                                                <a href="delete?pid=<%= product.getId()%>"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                        <%-- 
                                         <c:forEach items="${listP}" var="o">
                                             <tr>
                                                 <td class="goods-page-id">
@@ -108,15 +153,13 @@
                                                 <td class="del-goods-col">
                                                     <a href="delete?pid=${o.id}"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
                                                 </td>
-
                                             </tr>
-                                        </c:forEach>
-
+                                        </c:forEach> 
+                                        --%>
+                                        
                                     </table>
                                 </div>
                             </div>
-                            <button class="btn btn-default" type="submit" ><a href="index" style="text-decoration: none; color: #FFF;">Continue shopping</a> <i class="fa fa-shopping-cart"></i></button>
-                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add product</button>
                         </div>
                     </div>
                     <!-- END CONTENT -->
@@ -158,7 +201,6 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">
@@ -172,7 +214,24 @@
 
 
                 <!-- Delete Modal HTML -->
-
+                <div id="deleteEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="delete?pid=${o.id}" method="post" enctype="multipart/form-data">
+                                <div class="modal-header" style="background: #e94d1c; color: #FFF">						
+                                    <h4 class="modal-title">Add Product</h4>
+                                </div>
+                                <div class="modal-body">					
+                                    <p>are you sure delete?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">
+                                    <input type="submit" data-toggle="modal" class="btn btn-primary" value="OK">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
 
 

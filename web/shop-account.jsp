@@ -74,40 +74,40 @@
                         <div class="sidebar col-md-3 col-sm-3">
                             <ul class="list-group margin-bottom-25 sidebar-menu">
                                 <li class="list-group-item clearfix"><a href="shop-account.jsp"><i class="fa fa-angle-right"></i> My account</a></li>
+                                <li class="list-group-item clearfix"><a href="shop-mychangepassword.jsp"><i class="fa fa-angle-right"></i> Restore Password</a></li>
+                                <li class="list-group-item clearfix"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
+
                             </ul>
                         </div>
                         <!-- END SIDEBAR -->
 
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-9 col-sm-7">
-                            <h1>My Account Page</h1>
                             <div class="content-page">
-                                <h3>ID: ${sessionScope.acc.id}</h3>
-                            <ul>
-                                <li>Account: ${sessionScope.acc.user}</li>
-                                <li>Name: ${sessionScope.acc.fullname}</li>
-                                <li>Phone: ${sessionScope.acc.phone}</li>
-                                <li>Address: ${sessionScope.acc.address}</li>
-                                
-                            </ul>
-                            <hr>
+                                <form action="editcc" method="post">
+                                    <div class="modal-header" style="background: #e94d1c; color: #FFF">						
+                                        <h4 class="modal-title">My Account Page</h4>
+                                    </div>
+                                    <div class="modal-body">					
+                                        <div class="form-group">
+                                            <label>ID</label>
+                                            <p>${sessionScope.acc.id}</p>
 
-                            <h3>Tools</h3>
-                            <ul>
-                                <li><a href="javascript:;">Change the password</a></li>
-                                <li><a href="javascript:;">Change the profile</a></li>
-                            </ul>
-
-<!--                            <h3>order</h3>
-                            <table>
-                                <tr>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                </tr>
-                                
-                            </table>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <p>${sessionScope.acc.user}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <p>${sessionScope.acc.phone}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <p>${sessionScope.acc.city} / ${sessionScope.acc.district} / ${sessionScope.acc.ward}</p>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <!-- END CONTENT -->
