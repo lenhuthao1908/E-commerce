@@ -5,31 +5,45 @@
  */
 package entity;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author nhuth
  */
 public class BillDetail {
+
     private int BillDetail_id;
     private int Bill_id;
     private int pid;
     private String pname;
     private int quantity;
     private int subtotal;
+    private Date date;
 
     public BillDetail() {
     }
 
-    public BillDetail(int BillDetail_id, int Bill_id, int pid, String pname, int quantity, int subtotal) {
+    public BillDetail(int BillDetail_id, int Bill_id, int pid, String pname, int quantity, int subtotal, Date date) {
         this.BillDetail_id = BillDetail_id;
         this.Bill_id = Bill_id;
         this.pid = pid;
         this.pname = pname;
         this.quantity = quantity;
         this.subtotal = subtotal;
+        this.date = date;
     }
 
+    public BillDetail(Date date) {
+        this.date = date;
+    }
     
+    public BillDetail(Date date, int subtotal, int quantity) {
+        this.date = date;
+        this.subtotal = subtotal;
+        this.quantity = quantity;
+    }
 
     public int getBillDetail_id() {
         return BillDetail_id;
@@ -79,11 +93,29 @@ public class BillDetail {
         this.subtotal = subtotal;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this.date);
+        return calendar.get(Calendar.MONTH) + 1;
+    }
+
+    public int getYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this.date);
+        return calendar.get(Calendar.YEAR);
+    }
+
     @Override
     public String toString() {
-        return   "{OrderBill=" + Bill_id + "(NameProduct=" + pname + ", Quantity=" + quantity + ", Subtotal=" + subtotal + ")}\n  ";
+        return "BillDetail{" + "BillDetail_id=" + BillDetail_id + ", Bill_id=" + Bill_id + ", pid=" + pid + ", pname=" + pname + ", quantity=" + quantity + ", subtotal=" + subtotal + ", date=" + date + '}';
     }
-    
-    
-    
+
 }

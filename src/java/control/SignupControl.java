@@ -44,6 +44,7 @@ public class SignupControl extends HttpServlet {
             String repass = request.getParameter("repass");
             String fullname = request.getParameter("fullname");
             String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
             String city = request.getParameter("city");
             String district = request.getParameter("district");
             String ward = request.getParameter("ward");
@@ -57,7 +58,7 @@ public class SignupControl extends HttpServlet {
                 Account lg = dao.login(user, pass);
                 if (sgp == null) {
                     //success
-                    dao.singup(user, pass, fullname, Integer.parseInt(phone),city,district, ward);
+                    dao.singup(user, pass, fullname, Integer.parseInt(phone), email, city,district, ward);
                     response.sendRedirect("shop-login-and-signup.jsp");
                 } else {
                     //fail

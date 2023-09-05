@@ -80,7 +80,7 @@
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input value="${acc.pass}" name="pass" type="pass" class="form-control" readonly required>
+                            <input value="${acc.pass}" name="pass" type="password" class="form-control" readonly required>
                         </div>
                         <div class="form-group">
                             <label>Fullname</label>
@@ -91,7 +91,11 @@
                             <input value="${acc.phone}" name="phone" type="tel" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <select class="form-group" id="city" name="city">
+                            <label>Email</label>
+                            <input value="${acc.email}" name="email" type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-group" id="city" name="city" >
                                 <option class="form-control" value="${acc.city}" selected>${acc.city}</option>           
                             </select>
                             <br>

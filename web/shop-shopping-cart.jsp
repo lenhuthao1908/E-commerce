@@ -16,7 +16,7 @@
     <!-- Head BEGIN -->
     <head>
         <meta charset="utf-8">
-        <title>Shopping cart | Metronic Shop UI</title>
+        <title>Shopping cart | NF-Shop</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -59,6 +59,7 @@
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
         <link href="assets/pages/css/portfolio.css" rel="stylesheet">
+
         <!-- Theme styles END -->
     </head>
     <!-- Head END -->
@@ -75,18 +76,21 @@
                         <div class="col-md-12 col-sm-12">
                             <h1>Shopping cart</h1>
                             <div class="goods-page">
-                                <div class="goods-data clearfix">
-                                    <div class="table-wrapper-responsive">
-                                        <table summary="Shopping cart">
-                                            <tr>
-                                                <th class="goods-page-stt">STT</th>
-                                                <th class="goods-page-id">ID</th>
-                                                <th class="goods-page-image" >IMAGE</th>
-                                                <th class="goods-page-description">DESCRIPTION</th>
-                                                <th class="goods-page-quantity" colspan="3">QUANTITY</th>
-                                                <th class="goods-page-price" colspan="2">PRICE</th>
-                                                <th class="goods-page-total" colspan="2">TOTAL</th>
-                                            </tr>
+                                <div class="text-warning" id="close-3s" style="font-size: 16px;">
+                                    <p><b>${mess}</b></p>
+                            </div>
+                            <div class="goods-data clearfix">
+                                <div class="table-wrapper-responsive">
+                                    <table summary="Shopping cart">
+                                        <tr>
+                                            <th class="goods-page-stt">STT</th>
+                                            <th class="goods-page-id">ID</th>
+                                            <th class="goods-page-image" >IMAGE</th>
+                                            <th class="goods-page-description">DESCRIPTION</th>
+                                            <th class="goods-page-quantity" colspan="3">QUANTITY</th>
+                                            <th class="goods-page-price" colspan="2">PRICE</th>
+                                            <th class="goods-page-total" colspan="2">TOTAL</th>
+                                        </tr>
 
                                         <%
 
@@ -97,7 +101,7 @@
                                         <%
                                             for (int i = 0; i < AddCartControl.listcart.size(); i++) {
                                                 Cart cart = AddCartControl.listcart.get(i);
-                                                ship = 30.000;
+                                                ship = 30000.0;
                                                 total = total + (cart.getQuantity() * cart.getCid().getPrice());
                                         %>
                                         <tr>
@@ -114,16 +118,17 @@
                                             <td class="goods-page-description">
                                                 <h3><a href="detail?pid=<%=cart.getCid().getId()%>"><%=cart.getCid().getName()%></a></h3>
                                                 <p><strong><%=cart.getCid().getTitle()%></strong></p>
-                                                <em><%=cart.getCid().getDescription()%></em>
+                                                <!--<em><%=cart.getCid().getDescription()%></em><br>-->
+                                                <p>SIZE: <strong><%= cart.getSize()%></strong></p><a href=""><i class="bi bi-pen"></i></a>
                                             </td>
                                             <td class="del-goods-col">
-                                                <a class="" href="addcart?action=AddToCart&code=<%= cart.getCid().getId()%>"><i class="fa fa-plus"></i></a>
+                                                <a class="" href="delcart?action=DelCart&code=<%= cart.getCid().getId()%>"><i class="fa fa-minus"></i></a>
                                             </td>
                                             <td class="goods-page-quantity">
                                                 <strong><%=cart.getQuantity()%></strong>
                                             </td>
                                             <td class="del-goods-col">
-                                                <a class="" href="delcart?action=DelCart&code=<%= cart.getCid().getId()%>"><i class="fa fa-minus"></i></a>
+                                                <a class="" href="addcart?action=AddToCart&code=<%= cart.getCid().getId()%>"><i class="fa fa-plus"></i></a>
                                             </td>
                                             <td class="goods-page-price">
                                                 <strong><%=cart.getCid().getPrice()%></strong>
@@ -132,8 +137,18 @@
                                                 <strong><%=cart.getCid().getPrice() * cart.getQuantity()%></strong>
                                             </td>
                                             <td class="del-goods-col">
-                                                <a class="" href="delcart?action=DelCartP&code=<%= cart.getCid().getId()%>"><i class="fa fa-trash"></i></a>
+                                                <a onclick="showAlert()" class="" ><i class="fa fa-trash"></i></a>
                                             </td>
+                                        <script type="text/javascript">
+                                            function showAlert() {
+                                                var result = confirm("Are you sure you want to delete this product from your cart?");
+                                                if (result) {
+                                                    window.location.href = "delcart?action=DelCartP&code=<%= cart.getCid().getId()%>"; // chuyển hướng đến servlet và truyền tham số "action=ok"
+                                                } else {
+                                                     // chuyển hướng đến servlet và truyền tham số "action=cancel"
+                                                }
+                                            }
+                                        </script>
                                         </tr>
 
                                         <%
@@ -151,12 +166,12 @@
                                         </li>
                                         <li>
                                             <em>Shipping cost</em>
-                                            <strong class="price"><span>$</span><%= ship%></strong>
+                                            <strong class="price"><%= ship%></strong>
                                         </li>
 
                                         <li class="shopping-total-price">
                                             <em>Total</em>
-                                            <strong class="price"><span>$</span><%= total + ship%></strong>
+                                            <strong class="price"><%= total + ship%></strong>
                                         </li>
 
 
@@ -176,107 +191,27 @@
                     <!-- END CONTENT -->
                 </div>
                 <!-- END SIDEBAR & CONTENT -->
-
-                <!-- add Modal HTML -->
-<!--                <div id="checkoutEmployeeModal" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form action="checkout" method="post">
-                                <div class="modal-header" style="background: #e94d1c; color: #FFF">						
-                                    <h4 class="modal-title">Check out</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>ID</label>
-                                            <input value="${sessionScope.acc.id}" name="idacc" type="text" class="form-control" readonly required>
+                <!--                <div id="messbox" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                
+                                            <div class="modal-header" style="background: #e94d1c; color: #FFF">						
+                                                <h4 class="modal-title">Message Box</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <p><strong>Are you sure to delete the product in this cart?</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">
+                                                                        <input type="submit"  class="btn btn-primary" value="Add">
+                                                <a data-bind="" href="delcart?action=DelCart&code="><input type="button"  class="btn btn-primary" value="delete"></a>
+                                            </div>
                                         </div>
-                                        <label>Account</label>
-                                        <input value="${sessionScope.acc.user}" name="acc" type="text" class="form-control" readonly required>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Fullname</label>
-                                        <input name="name" type="text" class="form-control" required placeholder="Enter your full name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input name="phone" type="tel" class="form-control" required placeholder="Enter your phone">
-                                    </div>
-                                    <div class="form-group">
-                                        <label >City</label>
-                                        <select class="form-control input-sm" id="country" name="city">
-                                            <option value=""> --- Please Select --- </option>
-                                            <option value="Can Tho">Cần Thơ</option>
-                                            <option value="An Giang">An Giang</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Address delivery</label>
-                                        <textarea name="address" rows="3" class="form-control" placeholder="Enter your delivery address"></textarea>
-                                    </div>
+                                </div>-->
 
-
-                                    <table class="col-md-12 col-sm-12">
-                                        <h3>Bill</h3>
-                                        <tr>
-                                            <th class="goods-page-name" colspan="2">NAME</th>
-                                            <th class="goods-page-quantity" colspan="1">QUANTITY</th>
-                                            <th class="goods-page-price" colspan="1">PRICE</th>
-                                        </tr>
-                                        <%                                            
-                                            if (AddCartControl.listcart != null) {
-                                                int ship = 30;
-                                                double total = 0;
-                                        %>
-                                        <%
-                                            for (int i = 0; i < AddCartControl.listcart.size(); i++) {
-                                                Cart cart = AddCartControl.listcart.get(i);
-
-                                                total = total + (cart.getQuantity() * cart.getCid().getPrice());
-                                        %>
-                                        <tr>
-                                            <td class="goods-page-name" colspan="2" ><%=cart.getCid().getName()%></td>
-                                            <td class="goods-page-quantity" colspan="1"><%=cart.getQuantity()%></td>
-                                            <td class="goods-page-price" colspan="1"><%=cart.getCid().getPrice()%></td>
-                                        </tr>
-                                        <%
-                                            }
-                                        %>
-                                    </table>
-
-                                    <table class="col-md-12 col-sm-12">
-                                        <tr>
-                                            <th class="goods-page-name" colspan="2">TOTAL</th>
-                                            <th class="goods-page-quantity" colspan="1"></th>
-                                            <th class="goods-page-price" colspan="1"><%= total%></th>
-                                        </tr>
-                                        <tr>
-                                            <th class="goods-page-name" colspan="2">SHIP</th>
-                                            <th class="goods-page-quantity" colspan="1"></th>
-                                            <th class="goods-page-price" colspan="1"><%= ship%></th>
-                                        </tr>
-                                        <tr>
-                                            <th class="goods-page-name" colspan="2">TOTAL</th>
-                                            <th class="goods-page-quantity" colspan="1"></th>
-                                            <th class="goods-page-price" colspan="1"><%= total + ship%></th>
-                                        </tr>
-
-                                    </table>
-
-                                    <%
-                                        }
-                                    %>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">
-                                    <a href="//checkout"><input type="submit" class="btn btn-primary" value="Checkout"></a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
 
@@ -303,18 +238,29 @@
         <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
 
+
         <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function () {
-                Layout.init();
-                Layout.initOWL();
-                Layout.initTwitter();
-                Layout.initImageZoom();
-                Layout.initTouchspin();
-                Layout.initUniform();
-                Layout.initSliderRange();
-            });
+                                            jQuery(document).ready(function () {
+                                                Layout.init();
+                                                Layout.initOWL();
+                                                Layout.initTwitter();
+                                                Layout.initImageZoom();
+                                                Layout.initTouchspin();
+                                                Layout.initUniform();
+                                                Layout.initSliderRange();
+                                            });
         </script>
+        <script>
+            // Lấy đối tượng thẻ div bằng ID
+            var div = document.getElementById("close-3s");
+
+            // đặt thời gian chờ 10 giây và sau đó ẩn thẻ div
+            setTimeout(function () {
+                div.style.display = "none";
+            }, 3000);
+        </script>
+
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>
     <!-- END BODY -->

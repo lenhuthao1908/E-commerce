@@ -157,7 +157,7 @@ public final class shop_002dproduct_002dlist_jsp extends org.apache.jasper.runti
       out.write("                                <div class=\"content-search margin-bottom-20\">\n");
       out.write("                                    <div class=\"row\">\n");
       out.write("                                        <div class=\"col-md-6\">\n");
-      out.write("                                            <h1>Search result for <em>shoes</em></h1>\n");
+      out.write("                                            <h1>Search result for <em>Shopping</em></h1>\n");
       out.write("                                        </div>\n");
       out.write("                                        <div class=\"col-md-6\">\n");
       out.write("                                            <form action=\"search\" method=\"post\">\n");
@@ -183,8 +183,8 @@ public final class shop_002dproduct_002dlist_jsp extends org.apache.jasper.runti
       out.write("                        <!-- END PRODUCT LIST -->\n");
       out.write("                        <!-- BEGIN PAGINATOR -->\n");
       out.write("                        <div class=\"row\">\n");
-      out.write("                            <div class=\"col-md-4 col-sm-4 items-info\">Items 1 to 9 of 10 total</div>\n");
-      out.write("                            <div class=\"col-md-8 col-sm-8\">\n");
+      out.write("                            <!--<div class=\"col-md-4 col-sm-4 items-info\">Items 1 to 9 of 10 total</div>-->\n");
+      out.write("                            <div class=\"col-md-8 col-sm-8 pull-right\">\n");
       out.write("                                ");
       if (_jspx_meth_c_forEach_1(_jspx_page_context))
         return;
@@ -265,7 +265,7 @@ public final class shop_002dproduct_002dlist_jsp extends org.apache.jasper.runti
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_0.setParent(null);
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listpage}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listP}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_c_forEach_0.setVar("o");
     int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
     try {
@@ -296,9 +296,9 @@ public final class shop_002dproduct_002dlist_jsp extends org.apache.jasper.runti
           out.write("                                        <div class=\"pi-price\">");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.price}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</div>\n");
-          out.write("                                        <a href=\"addcart?action=AddCart&code=");
+          out.write("<!--                                        <a href=\"addcart?action=AddCart&code=");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\" class=\"btn btn-default add2cart\">Add to cart</a>\n");
+          out.write("\" class=\"btn btn-default add2cart\">Add to cart</a>-->\n");
           out.write("                                    </div>\n");
           out.write("                                </div>\n");
           out.write("                                <!-- PRODUCT ITEM END -->\n");
@@ -340,7 +340,7 @@ public final class shop_002dproduct_002dlist_jsp extends org.apache.jasper.runti
         do {
           out.write("\n");
           out.write("                                    <ul class=\"pagination\">\n");
-          out.write("                                        <li><a href=\"index?index=");
+          out.write("                                        <li><a style=\"font-weight: 900;\" href=\"index?page=");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${i}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write('"');
           out.write('>');

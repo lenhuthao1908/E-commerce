@@ -51,7 +51,9 @@ public class AddControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String pname = request.getParameter("name");
-        String pprice = request.getParameter("price");
+        String pcost = request.getParameter("cost");
+        int psale = Integer.parseInt(request.getParameter("sale"));
+        int pquantity = Integer.parseInt(request.getParameter("quantity"));
         String ptitle = request.getParameter("title");
         String pdescription = request.getParameter("description");
         String pcategory = request.getParameter("category");
@@ -77,7 +79,7 @@ public class AddControl extends HttpServlet {
                 out.write(bytes, 0, read);
             }
             DAO dao = new DAO();
-            dao.insertProduct(pname, fileName, pprice, ptitle, pdescription, pcategory, sid);
+            dao.insertProduct(pname, fileName, pcost, psale, pquantity, ptitle, pdescription, pcategory, sid);
             response.sendRedirect("manager");
 
 //            writer.println("New file " + fileName + " created at " + "C:\\Users\\nhuth\\OneDrive\\Documents\\NetBeansProjects\\video_1\\Project_banhang\\web\\image");

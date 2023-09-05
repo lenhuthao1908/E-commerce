@@ -39,21 +39,33 @@ public class CategoryControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String cateID = request.getParameter("cid");
+        String indexPage = request.getParameter("page");
+//        if (indexPage == null) {
+//            indexPage = "1";
+//        }
+//        int index = Integer.parseInt(indexPage);
         // lay duoc category ve
         DAO dao = new DAO();
         List<Product> list = dao.getProductByCID(cateID);
         List<Category> listC = dao.getAllCategory();
         List<Product> top3lastP = dao.getTop3Last();
         List<Brand> listB = dao.getAllBrand();
-        
+//        int count = dao.getCountProductCID(cateID);
+//        int endPage = count / 6;
+//        if (count % 6 != 0) {
+//            endPage++;
+//        }
+//        List<Product> list = dao.paggingProductCID(cateID, index);
+
+//        request.setAttribute("endP", endPage);
         request.setAttribute("listB", listB);
         request.setAttribute("listP", list);
         request.setAttribute("listCC", listC);
         request.setAttribute("p3l", top3lastP);
         request.setAttribute("tag", cateID);
-        
+
         request.getRequestDispatcher("shop-product-list.jsp").forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

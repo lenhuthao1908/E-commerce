@@ -72,8 +72,8 @@
 
             <div class="main">
                 <div class="container">
-                    <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                    <ul class="breadcrumb" style="font-weight: 700; font-size: 24px">
+                        <li><a href="home">Home</a></li>
                         <li><a href="index">Store</a></li>
                         <li class="active">${detail.name}</li>
                 </ul>
@@ -117,40 +117,63 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="product-main-image">
-                                        <img src="image/${detail.image}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="${detail.image}">
+                                        <img src="image/${detail.image}" alt="Product detail" class="img-responsive" data-BigImgsrc="${detail.image}">
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <h1><%= p.getName()%></h1>
+                                <div class="col-md-5 col-sm-5">
+                                    <h1><%= p.getName()%></h1>                                    
                                     <div class="price-availability-block clearfix">
                                         <div class="price">
-                                            <strong><span>$</span><%= p.getPrice()%></strong>
+                                            <%
+                                                if (p.getSale() != 0) {
+                                            %>
+                                            <em><span><%= p.getCost()%></span> VND</em> <br/>
+                                            <%
+                                                }
+                                            %>
+                                            <strong><%= p.getPrice()%> <span>VND</span></strong>
                                         </div>
                                         <div class="availability">
-                                            Product ID: <strong><%= p.getId()%></strong>
+                                            Brand: <strong><%= p.getTitle()%></strong> <br/>
+                                            Product ID: <strong><%= p.getId()%></strong> <br/>
+                                            Quantity: <strong><%= p.getQuantity()%></strong>
                                         </div>
                                     </div>
-                                    <div class="description">
-                                        <p><%= p.getDescription()%></p>
-                                    </div>
-                                    <div class="product-page-options">
-                                        <div class="pull-left">
-                                            <label class="control-label">Size:</label>
-                                            <select class="form-control input-sm">
-                                                <c:forEach items="${listS}" var="o">
-                                                    <option>${o.sname}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="product-page-cart">
-                                        <div class="product-quantity">
-                                            <input name="quantity" id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                                        </div>
-                                        <a href="addcart?action=AddToCartOndetail&code=${detail.id}" class="btn btn-default add2cart btn-primary">Add to cart</a>
-                                    </div>
-                                    <%
+                                    <form action="addcart?action=AddToCartOndetail" method="post">
 
+                                        <div class="product-page-options">
+                                            <div class="pull-left">
+                                                <label class="control-label">Size:</label>
+                                                <select class="form-control input-sm" name="size">
+                                                    <c:forEach items="${listS}" var="o">
+                                                        <option value="${o.sid}">${o.sname}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="product-page-cart">
+                                            <!--<a href="addcart?action=AddToCartOndetail&code=${detail.id}" class="btn btn-default add2cart btn-primary">Add to cart</a>-->
+                                            <%
+                                                if (p.getQuantity() > 0) {
+                                            %>
+                                            <div class="product-quantity">
+                                                <input name="quantity" id="product-quantity" type="text" value="1" readonly class="form-control input-sm" />
+                                            </div>
+                                            <button name="code" type="submit" value="${detail.id}" class="btn btn-default add2cart btn-primary">Add to cart</button>
+                                            <%
+                                            } else {
+                                            %>
+                                            <p class="btn btn-default add2cart">Out of product</p>
+                                            <%
+                                                }
+                                            %>
+
+
+
+                                        </div>
+                                    </form>
+                                    <%
                                         int total = 0;
                                         int totalstar = 0;
                                         for (int i = list.size() - 1; i >= 0; i--) {
@@ -173,14 +196,15 @@
                                         <div class="rateit" data-rateit-value="<%= totalstar%>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                         <a href="#Reviews"><%= list.size()%> reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#comment">Write a review</a>
                                     </div>
-                                    
+
                                 </div>
+
                             </div>
 
                             <div class="product-page-content">
                                 <ul id="myTab" class="nav nav-tabs">
                                     <li><a href="#Description" data-toggle="tab">Description</a></li>
-                                    <li><a href="#Information" data-toggle="tab">Information</a></li>
+                                    <!--<li><a href="#Information" data-toggle="tab">Information</a></li>-->
 
                                     <li class="active"><a href="#Reviews" data-toggle="tab">Reviews (<%= list.size()%>)</a></li>
 
@@ -190,33 +214,33 @@
                                     <div class="tab-pane fade" id="Description">
                                         <p>${detail.description} </p>
                                     </div>
-                                    <div class="tab-pane fade" id="Information">
-                                        <table class="datasheet">
-                                            <tr>
-                                                <th colspan="2">Additional features</th>
-                                            </tr>
-                                            <tr>
-                                                <td class="datasheet-features-type">Value 1</td>
-                                                <td>21 cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="datasheet-features-type">Value 2</td>
-                                                <td>700 gr.</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="datasheet-features-type">Value 3</td>
-                                                <td>10 person</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="datasheet-features-type">Value 4</td>
-                                                <td>14 cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="datasheet-features-type">Value 5</td>
-                                                <td>plastic</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                    <!--                                    <div class="tab-pane fade" id="Information">
+                                                                            <table class="datasheet">
+                                                                                <tr>
+                                                                                    <th colspan="2">Additional features</th>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="datasheet-features-type">Value 1</td>
+                                                                                    <td>21 cm</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="datasheet-features-type">Value 2</td>
+                                                                                    <td>700 gr.</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="datasheet-features-type">Value 3</td>
+                                                                                    <td>10 person</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="datasheet-features-type">Value 4</td>
+                                                                                    <td>14 cm</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="datasheet-features-type">Value 5</td>
+                                                                                    <td>plastic</td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>-->
                                     <div class="tab-pane fade in active" id="Reviews">
                                         <%
                                             for (int i = list.size() - 1; i >= 0; i--) {
@@ -225,11 +249,14 @@
                                         %>
                                         <div class="review-item clearfix">
                                             <div class="review-item-submitted">
-                                                <a href="delcomment?cm_id=<%= comment.getComment_id()%>&pid=<%= comment.getComment_pid() %>" ><i class="del-goods"title="Delete"></i></a>
+                                                <a href="delcomment?cm_id=<%= comment.getComment_id()%>&pid=<%= comment.getComment_pid()%>" ><i class="del-goods"title="Delete"></i></a>
                                             </div>
                                             <div class="review-item-submitted">
                                                 <strong><%= comment.getComment_name()%></strong>
                                                 <div class="rateit" data-rateit-value="<%= comment.getComment_star()%>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                            </div> 
+                                            <div class="review-item-submitted">
+                                                <em><%= comment.getDate()%></em>
                                             </div> 
                                             <div class="review-item-content">
                                                 <p><%= comment.getComment_descrsiption()%></p>
@@ -243,11 +270,8 @@
 
 
 
-
-
-
                                         <!-- BEGIN FORM-->
-                                        <form action="addcomment" id="comment">
+                                        <form onsubmit.prenven action="addcomment" id="comment">
                                             <h2>Write a review</h2>
                                             <div class="form-group">
                                                 <label>Username</label>
@@ -266,17 +290,24 @@
                                                 <input name="comment_star" type="range" value="4" step="1" id="backing5">
                                                 <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                                                 </div>
-                                            </div>
-                                            <div class="padding-top-20">                  
-                                                <button type="submit" class="btn btn-primary">Send</button>
+                                                <div class="padding-top-20">                  
+                                                    <button type="submit" class="btn btn-primary">Send</button>
+                                                </div>
+                                                <div class="text-warning" id="close-3s" style="font-size: 16px;">
+                                                    <p><b>${err}</b></p>
+                                                </div>
                                             </div>
                                         </form>
                                         <!-- END FORM--> 
                                     </div>
                                 </div>
                             </div>
-
+                            <%                                if (p.getSale() != 0) {
+                            %>
                             <div class="sticker sticker-sale"></div>
+                            <%
+                                }
+                            %>
                         </div>
                         <%
                         %>
@@ -284,70 +315,78 @@
                 </div>
                 <!-- END CONTENT -->
             </div>
-            <!-- END SIDEBAR & CONTENT -->
 
-            <!-- BEGIN SIMILAR PRODUCTS -->
-<!--            <div class="row margin-bottom-40">
-                <div class="col-md-12 col-sm-12">
-                    <h2>Product low price under 100 </h2>
-                    <div class="owl-carousel owl-carousel4">
-                        <c:forEach items="${p4l}" var="o">
-                            <div>
-                                <div class="product-item">
-                                    <div class="pi-img-wrapper">
-                                        <img src="${o.image}" style="width: 270px; height: 300px;" class="img-responsive" alt="Berry Lace Dress">
-                                        <div>
-                                            <a href="${o.image}" class="btn btn-default fancybox-button">Zoom</a>
-
-                                        </div>
-                                    </div>
-                                    <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
-                                    <div class="pi-price">${o.price}</div>
-                                    <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                                    <div class="sticker sticker-new"></div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-                 END SIMILAR PRODUCTS 
-            </div>-->
         </div>
+        <div id="messagebox" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="messbox" method="">
+                        <div class="modal-header" style="background: #e94d1c; color: #FFF">						
+                            <h4 class="modal-title">Message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                Message warring!!
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <jsp:include page="shop-footer.jsp"></jsp:include>
+    <jsp:include page="shop-footer.jsp"></jsp:include>
 
-        <!-- Load javascripts at bottom, this will reduce page load time -->
-        <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->  
-        <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-        <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->  
+    <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
 
-        <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-        <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-        <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
-        <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
-        <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+    <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
 
-        <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function () {
-                Layout.init();
-                Layout.initOWL();
-                Layout.initTwitter();
-                Layout.initImageZoom();
-                Layout.initTouchspin();
-                Layout.initUniform();
+    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            Layout.init();
+            Layout.initOWL();
+            Layout.initTwitter();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+            Layout.initUniform();
+        });
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
             });
-        </script>
-        <!-- END PAGE LEVEL JAVASCRIPTS -->
-    </body>
-    <!-- END BODY -->
+        }, 4000);
+    </script>
+    <script>
+        // Lấy đối tượng thẻ div bằng ID
+        var div = document.getElementById("close-3s");
+
+        // đặt thời gian chờ 10 giây và sau đó ẩn thẻ div
+        setTimeout(function () {
+            div.style.display = "none";
+        }, 3000);
+    </script>
+
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
 </html>

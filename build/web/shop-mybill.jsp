@@ -4,6 +4,7 @@
     Author     : nhuth
 --%>
 
+<%@page import="entity.Product"%>
 <%@page import="entity.BillDetail"%>
 <%@page import="entity.Bill"%>
 <%@page import="java.util.List"%>
@@ -25,7 +26,7 @@
     <!-- Head BEGIN -->
     <head>
         <meta charset="utf-8">
-        <title>My Account | Metronic Shop UI</title>
+        <title>My Bill | NF-Shop</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -66,8 +67,8 @@
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
         <style>  
             table, th, td {  
-                border: 1px solid black;  
-                border-collapse: collapse;  
+                /*border: 1px solid black;*/  
+                /*border-collapse: collapse;*/  
             }  
             th, td {  
                 padding: 10px;  
@@ -86,19 +87,19 @@
 
             <div class="main">
                 <div class="container">
-                    <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="">Store</a></li>
+                    <ul class="breadcrumb" style="font-weight: 700; font-size: 24px">
+                        <li><a href="home">Home</a></li>
+                        <li><a href="index">Store</a></li>
                         <li class="active">My Account Page</li>
                     </ul>
                     <!-- BEGIN SIDEBAR & CONTENT -->
                     <div class="row margin-bottom-40">
                         <!-- BEGIN SIDEBAR -->
-                        <div class="sidebar col-md-3 col-sm-3">
+                        <div class="sidebar col-md-3 col-sm-3" >
                             <ul class="list-group margin-bottom-25 sidebar-menu">
                                 <li class="list-group-item clearfix"><a href="shop-account.jsp"><i class="fa fa-angle-right"></i> My account</a></li>
                                 <li class="list-group-item clearfix"><a href="shop-mychangepassword.jsp"><i class="fa fa-angle-right"></i> Restore Password</a></li>
-                                <li class="list-group-item clearfix"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
+                                <li class="list-group-item clearfix active"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
 
                         </div>
                         <!-- END SIDEBAR -->
@@ -116,13 +117,13 @@
                                         <th class="goods-page-pass" colspan="1"><strong>STATUS</strong></th>
                                     </tr>
                                 <%
+                                    int ship = 30000;
                                     Account a = (Account) session.getAttribute("acc");
                                     DAO dao = new DAO();
                                     List<Bill> list = dao.getAllOrderBill();
-                                    for (int i = 0; i < list.size(); i++) {
+                                    for (int i = list.size() - 1; i >= 0; i--) {
                                         Bill bill = list.get(i);
                                         if (a.getId() == bill.getAcc_id()) {
-
                                             List<BillDetail> detail = dao.getBillDetailById(bill.getBill_id());
                                 %>
                                 <tr>
@@ -133,7 +134,7 @@
                                     <td class="font" colspan="3"><%= bill.getCity()%> <br> <%= bill.getDistrict()%> <br> <%= bill.getWard()%></td>
                                     <td class="font" colspan="1"><%= bill.getDate()%></td>
                                     <td class="font" colspan="2"><%= bill.getDesbill()%></td>
-                                    <td class="font" colspan="1"><%= bill.getTotal()%></td>
+                                    <td class="font" colspan="1"><%= bill.getTotal() %></td>
                                     <td class="font" colspan="1">
                                         <%
                                             if (bill.getStatus() == 0) {
@@ -165,14 +166,35 @@
                                         %>
                                     </td>
                                 </tr>
-                                <tr style="background: lightyellow;">
-                                    <td colspan="9"><%= detail.toString()%> <br></td>
-                                    
+                                <tr>
+                                    <th class="goods-page-stt" colspan="1">STT</th>
+                                    <th class="goods-page-image" colspan="2" >IMAGE</th>
+                                    <th class="goods-page-id" colspan="1">ID</th>
+                                    <th class="goods-page-id" colspan="3">NAME</th>
+                                    <th class="goods-page-quantity" colspan="1">QUANTITY</th>
+                                    <th class="goods-page-price" colspan="1">PRICE</th>
                                 </tr>
-                                
-                                
-                               
-                                
+                                <%
+                                    for (int j = 0; j < detail.size(); j++) {
+                                        BillDetail b = detail.get(j);
+                                        Product p = dao.getProductByID(Integer.toString(b.getPid()));
+                                %>
+
+                                <tr style="">
+                                    <td colspan="1"><%= j + 1%></td>
+                                    <td class="goods-page-image" colspan="2">
+                                        <a href="detail?pid=<%= p.getId()%>"><img src="image/<%= p.getImage()%>" alt="Product image"></a>
+                                    </td>
+                                    <td colspan="1"><%= p.getId()%></td>
+                                    <td colspan="3"><%= p.getName()%></td>
+                                    <td colspan="1"><%= b.getQuantity()%></td>
+                                    <td colspan="1"><%= p.getPrice()%></td>
+
+                                </tr>
+                                <%
+                                    }
+                                %>    
+
 
                                 <%
                                         }

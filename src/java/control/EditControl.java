@@ -52,7 +52,9 @@ public class EditControl extends HttpServlet {
         String pid = request.getParameter("id");
         String pname = request.getParameter("name");
         String pimage = request.getParameter("image");
-        String pprice = request.getParameter("price");
+        String pcost = request.getParameter("cost");
+        int psale = Integer.parseInt(request.getParameter("sale"));
+        int pquantity = Integer.parseInt(request.getParameter("quantity"));
         String ptitle = request.getParameter("title");
         String pdescription = request.getParameter("description");
         String pcategory = request.getParameter("category");
@@ -75,9 +77,9 @@ public class EditControl extends HttpServlet {
                 out.write(bytes, 0, read);
             }
             DAO dao = new DAO();
-            dao.editProduct(pname, fileName, pprice, ptitle, pdescription, pcategory, pid);
+            dao.editProduct(pname, fileName, pcost, psale, pquantity, ptitle, pdescription, pcategory, pid);
             request.getRequestDispatcher("manager").forward(request, response);
-            
+
         } catch (FileNotFoundException fne) {
             writer.println("You either did not specify a file to upload or are "
                     + "trying to upload a file to a protected or nonexistent "

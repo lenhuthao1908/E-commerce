@@ -39,6 +39,7 @@ public class EditAccountControl extends HttpServlet {
         String pass = request.getParameter("pass");
         String fullname = request.getParameter("fullname");
         int phone = Integer.parseInt(request.getParameter("phone"));
+        String email = request.getParameter("email");
         String city = request.getParameter("city");
         String district = request.getParameter("district");
         String ward = request.getParameter("ward");
@@ -46,7 +47,7 @@ public class EditAccountControl extends HttpServlet {
         int admin = Integer.parseInt(request.getParameter("admin"));
         
         DAO dao = new DAO();
-        dao.editAccount(user, pass, sell, admin, fullname, phone, city, district, ward, aid);
+        dao.editAccount(user, pass, sell, admin, fullname, phone, email, city, district, ward, aid);
         response.sendRedirect("manageracc");
         
     }

@@ -18,17 +18,19 @@ public class Comment {
     private String comment_name;
     private String comment_descrsiption;
     private int comment_star;
+    private Date date;
 
     public Comment() {
     }
 
-    public Comment(int comment_id, int comment_pid, int comment_accid, String comment_name, String comment_descrsiption, int comment_star) {
+    public Comment(int comment_id, int comment_pid, int comment_accid, String comment_name, String comment_descrsiption, int comment_star, Date date) {
         this.comment_id = comment_id;
         this.comment_pid = comment_pid;
         this.comment_accid = comment_accid;
         this.comment_name = comment_name;
         this.comment_descrsiption = comment_descrsiption;
         this.comment_star = comment_star;
+        this.date = date;
     }
 
     public int getComment_id() {
@@ -79,12 +81,17 @@ public class Comment {
         this.comment_star = comment_star;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @Override
     public String toString() {
-        return "Comment{" + "comment_id=" + comment_id + ", comment_pid=" + comment_pid + ", comment_accid=" + comment_accid + ", comment_name=" + comment_name + ", comment_descrsiption=" + comment_descrsiption + ", comment_star=" + comment_star  + '}';
-    }
-    
-    
+        return "Comment{" + "comment_id=" + comment_id + ", comment_pid=" + comment_pid + ", comment_accid=" + comment_accid + ", comment_name=" + comment_name + ", comment_descrsiption=" + comment_descrsiption + ", comment_star=" + comment_star + ", date=" + date + '}';
+    } 
     
 }

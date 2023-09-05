@@ -94,8 +94,16 @@
                             <input value="image/${detail.image}" name="image" type="file" class="" required>
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <input value="${detail.price}" name="price" type="text" class="form-control" required>
+                            <label>Cost</label>
+                            <input value="${detail.cost}" name="cost" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>sale</label>
+                            <input value="${detail.sale}" name="sale" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input value="${detail.quantity}" name="quantity" type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Title</label>

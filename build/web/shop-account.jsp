@@ -4,6 +4,9 @@
     Author     : nhuth
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="entity.Account"%>
+<%@page import="dao.DAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +17,7 @@
     <!-- Head BEGIN -->
     <head>
         <meta charset="utf-8">
-        <title>My Account | Metronic Shop UI</title>
+        <title>My Account | NF-Shop</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -63,51 +66,74 @@
 
             <div class="main">
                 <div class="container">
-                    <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="">Store</a></li>
+                    <ul class="breadcrumb" style="font-weight: 700; font-size: 24px">
+                        <li><a href="home">Home</a></li>
+                        <li><a href="index">Store</a></li>
                         <li class="active">My Account Page</li>
                     </ul>
                     <!-- BEGIN SIDEBAR & CONTENT -->
                     <div class="row margin-bottom-40">
                         <!-- BEGIN SIDEBAR -->
-                        <div class="sidebar col-md-3 col-sm-3">
+                        <div class="sidebar col-md-3 col-sm-3" >
                             <ul class="list-group margin-bottom-25 sidebar-menu">
-                                <li class="list-group-item clearfix"><a href="shop-account.jsp"><i class="fa fa-angle-right"></i> My account</a></li>
+                                <li class="list-group-item clearfix active"><a href="shop-account.jsp"><i class="fa fa-angle-right"></i> My account</a></li>
                                 <li class="list-group-item clearfix"><a href="shop-mychangepassword.jsp"><i class="fa fa-angle-right"></i> Restore Password</a></li>
-                                <li class="list-group-item clearfix"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
+                                <c:if test="${sessionScope.acc.isAdmin != 1 }">
+                                    <c:if test="${sessionScope.acc.isSell != 1 }">
+                                    <li class="list-group-item clearfix"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
+                                    </c:if>
+                                </c:if>
 
-                            </ul>
-                        </div>
-                        <!-- END SIDEBAR -->
+                        </ul>
+                    </div>
+                    <!-- END SIDEBAR -->
 
-                        <!-- BEGIN CONTENT -->
-                        <div class="col-md-9 col-sm-7">
-                            <div class="content-page">
-                                <form action="editcc" method="post">
-                                    <div class="modal-header" style="background: #e94d1c; color: #FFF">						
-                                        <h4 class="modal-title">My Account Page</h4>
-                                    </div>
-                                    <div class="modal-body">					
-                                        <div class="form-group">
-                                            <label>ID</label>
-                                            <p>${sessionScope.acc.id}</p>
+                    <!-- BEGIN CONTENT -->
+                    <div class="col-md-9 col-sm-7">
+                        <div class="content-page">
+                            <form action="" method="post">
+                                <div class="modal-header" style="background: #e94d1c; color: #FFF">						
+                                    <h4 class="modal-title">My Account Page</h4>
+                                </div>
+                                <%
+                                    Account a = (Account) session.getAttribute("acc");
+                                    DAO dao = new DAO();
+                                    Account acc = dao.getAccountByID(Integer.toString(a.getId()));
+                                %>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>ID</label>
+                                        <p><%= acc.getId() %></p>
 
                                     </div>
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <p>${sessionScope.acc.user}</p>
+                                        <p><%= acc.getUser()%></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fullname</label>
+                                        <p><%= acc.getFullname()%></p>
                                     </div>
                                     <div class="form-group">
                                         <label>Phone</label>
-                                        <p>${sessionScope.acc.phone}</p>
+                                        <p><%= acc.getPhone()%></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <p><%= acc.getEmail()%></p>
                                     </div>
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <p>${sessionScope.acc.city} / ${sessionScope.acc.district} / ${sessionScope.acc.ward}</p>
+                                        <p><%= acc.getWard()%> / <%= acc.getDistrict()%> / <%= acc.getCity()%></p>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary"><a href="loadmyaccount?aid=<%= acc.getId() %>" style="color: #FFF; text-decoration: none;">Edit Account</a></button>
+                                </div>
+                                <%
+                                %>
                             </form>
+
                         </div>
                     </div>
                     <!-- END CONTENT -->

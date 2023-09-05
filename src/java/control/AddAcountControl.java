@@ -43,12 +43,13 @@ public class AddAcountControl extends HttpServlet {
         int aadmin = Integer.parseInt(request.getParameter("admin"));
         String afullname = request.getParameter("fullname");
         int aphone = Integer.parseInt(request.getParameter("phone"));
+        String aemail = request.getParameter("email");
         String acity = request.getParameter("city");
         String adistrict = request.getParameter("district");
         String award = request.getParameter("ward");
 
         DAO dao = new DAO();
-        dao.insertAccount(auser, apass, asell, aadmin, afullname, aphone, acity, adistrict, award);
+        dao.insertAccount(auser, apass, asell, aadmin, afullname, aphone,aemail, acity, adistrict, award);
         response.sendRedirect("manageracc");
 
     }

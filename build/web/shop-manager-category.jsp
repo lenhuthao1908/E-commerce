@@ -61,6 +61,20 @@
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
         <!-- Theme styles END -->
+        <style>
+            .border-top-primary{
+                border-top: #e94d1c solid 2px;
+            }
+
+            .text-color-primary{
+                color: #e94d1c;
+            }
+            
+            .table-container-mh800{
+                max-height: 400px; /* Chiều cao tối đa của bảng */
+                overflow: auto; /* Hiển thị thanh cuộn khi bảng vượt quá kích thước đã định */
+            }
+        </style>
     </head>
     <!-- Head END -->
 
@@ -74,11 +88,11 @@
                     <div class="row margin-bottom-40">
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
-                            <h1>Category product</h1>
-                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add Category</button>
+                            <h1>Manager Category</h1>
+                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary margin-bottom-10" ><i class="fa fa-plus"></i> Add Category</button>
                             <div class="goods-page">
-                                <div class="goods-data clearfix">
-                                    <div class="table-wrapper-responsive">
+                                <div class="goods-data clearfix border-top-primary">
+                                    <div class="table-wrapper-responsive table-container-mh800">
                                         <table summary="Manager Category">
                                             <tr>
                                                 <th class="goods-page-pass"><strong>CID</strong></th>
@@ -91,7 +105,7 @@
                                             DAO dao = new DAO();
                                             List<Category> list = dao.getAllCategory();
 
-                                            for (int i = list.size()-1; i >= 0; i--) {
+                                            for (int i = list.size() - 1; i >= 0; i--) {
                                                 Category category = list.get(i);
                                         %>
                                         <tr>
@@ -115,32 +129,21 @@
                                             }
                                         %>
 
-                                        <%-- 
-                                        
-                                        <c:forEach items="${listCC}" var="o">
-                                            <tr>
-                                                <td class="goods-page-cid">
-                                                    <strong>${o.cid}</strong>
-                                                </td>
-                                                <td class="goods-page-cname">
-                                                    <strong>${o.cname}</strong>
-                                                </td>
 
-                                                <td class="edit-goods-col">
-                                                    <a href="loadcc?cid=${o.cid}"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
-                                                </td> 
-                                                <td class="del-goods-col">
-                                                    <a href="delcc?cid=${o.cid}"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
-                                                </td>
-
-                                            </tr>
-                                        </c:forEach>
-                                        --%>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+<!--                    <div class="col-md-8 col-sm-8 pull-right">
+                        <c:forEach begin="1" end="10" var="i">
+                            <ul class="pagination">
+                                <li><a style="font-weight: 900;" href="index?page=${i}">${i}</a></li>
+                            </ul>
+                        </c:forEach>
+
+                    </div>-->
                     <!-- END CONTENT -->
                 </div>
                 <!-- add Modal HTML -->
@@ -153,15 +156,9 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label>Category Id</label>
-                                        <input name="cid" type="text" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
                                         <label>Category Name</label>
                                         <input name="cname" type="text" class="form-control" required>
                                     </div>
-
-
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">

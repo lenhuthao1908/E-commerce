@@ -14,7 +14,7 @@
     <!-- Head BEGIN -->
     <head>
         <meta charset="utf-8">
-        <title>My Account | Metronic Shop UI</title>
+        <title>Restore Password | NF-Shop</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -62,35 +62,39 @@
         <jsp:include page="shop-header.jsp"></jsp:include>
 
             <div class="main">
-                <div class="container">
-                    <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="">Store</a></li>
+                <div class="container" >
+                    <ul class="breadcrumb" style="font-weight: 700; font-size: 24px">
+                        <li><a href="home">Home</a></li>
+                        <li><a href="index">Store</a></li>
                         <li class="active">My Account Page</li>
                     </ul>
                     <!-- BEGIN SIDEBAR & CONTENT -->
                     <div class="row margin-bottom-40">
                         <!-- BEGIN SIDEBAR -->
-                        <div class="sidebar col-md-3 col-sm-3">
+                        <div class="sidebar col-md-3 col-sm-3" >
                             <ul class="list-group margin-bottom-25 sidebar-menu">
                                 <li class="list-group-item clearfix"><a href="shop-account.jsp"><i class="fa fa-angle-right"></i> My account</a></li>
-                                <li class="list-group-item clearfix"><a href="shop-mychangepassword.jsp"><i class="fa fa-angle-right"></i> Restore Password</a></li>
-                                <li class="list-group-item clearfix"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
+                                <li class="list-group-item clearfix active"><a href="shop-mychangepassword.jsp"><i class="fa fa-angle-right"></i> Restore Password</a></li>
+                                <c:if test="${sessionScope.acc.isAdmin != 1 }">
+                                    <c:if test="${sessionScope.acc.isSell != 1 }">
+                                    <li class="list-group-item clearfix"><a href="shop-mybill.jsp"><i class="fa fa-angle-right"></i> My Bill</a></li>
+                                    </c:if>
+                                </c:if>
 
-                        </div>
-                        <!-- END SIDEBAR -->
+                    </div>
+                    <!-- END SIDEBAR -->
 
-                        <!-- BEGIN CONTENT -->
-                        <div class="col-md-9 col-sm-7">
-                            <div class="content-page">
-                                <form action="changepassword" method="post">
-                                    <div class="modal-header" style="background: #e94d1c; color: #FFF">						
-                                        <h4 class="modal-title">Restore Password Page</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label>Username</label> <br>
-                                            <input value="${sessionScope.acc.user}" name="user" type="text" class="form-control" readonly required>
+                    <!-- BEGIN CONTENT -->
+                    <div class="col-md-9 col-sm-7">
+                        <div class="content-page">
+                            <form action="changepassword" method="post">
+                                <div class="modal-header" style="background: #e94d1c; color: #FFF">						
+                                    <h4 class="modal-title">Restore Password Page</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Username</label> <br>
+                                        <input value="${sessionScope.acc.user}" name="user" type="text" class="form-control" readonly required>
                                     </div>
                                     <div class="form-group">
                                         <label>Old Password</label> <br>

@@ -6,8 +6,10 @@
 package control;
 
 import dao.DAO;
+import entity.Account;
 import entity.Cart;
 import entity.Product;
+import entity.size;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,18 +46,13 @@ public class AddCartControl extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
+            session.setAttribute("listcart", listcart);
+            Account acc = (Account) session.getAttribute("acc");
             DAO dao = new DAO();
             Product z = null;
+            size s = null;
             String code = null;
             switch (action) {
-                case "AddCart":
-                    code = request.getParameter("code");
-                    z = dao.getProductByID(code);
-                    Product p = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
-                    addtocart(p);
-                    System.out.println("size:" + listcart.size());
-                    response.sendRedirect("index");
-                    break;
                 case "DellCart":
                     int id = Integer.parseInt(request.getParameter("id"));
                     listcart.remove(id);
@@ -64,43 +61,28 @@ public class AddCartControl extends HttpServlet {
                 case "AddToCart":
                     code = request.getParameter("code");
                     z = dao.getProductByID(code);
-                    Product cp = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
+                    Product cp = new Product(Integer.parseInt(code), z.getName(), z.getImage(),z.getCost(), z.getSale(), z.getPrice(),z.getQuantity(), z.getTitle(), z.getDescription());
                     addtocartoncart(cp);
                     response.sendRedirect("shop-shopping-cart.jsp");
                     break;
                 case "AddToCartOndetail":
                     code = request.getParameter("code");
+                    int size = Integer.parseInt(request.getParameter("size"));
+                    int quantity = Integer.parseInt(request.getParameter("quantity"));
                     String link = "./detail?pid=" + code;
                     z = dao.getProductByID(code);
-                    Product detailcart = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
-                    detailaddcart(detailcart);
-                    
+                    s = dao.getSizeById(size);
+                    Product detailcart = new Product(Integer.parseInt(code), z.getName(), z.getImage(),z.getCost(), z.getSale(), z.getPrice(),z.getQuantity(), z.getTitle(), z.getDescription());
+                    detailaddcart(detailcart, s.getSname(), quantity);
+
                     response.sendRedirect(link);
                     break;
-                case "AddToCartOnHome":
-                    code = request.getParameter("code");
-                    z = dao.getProductByID(code);
-                    Product homecart = new Product(Integer.parseInt(code), z.getName(), z.getImage(), z.getPrice(), z.getTitle(), z.getDescription());
-                    hometocart(homecart);
-                    response.sendRedirect("home");
-                    break;
+
             }
         }
     }
 
-    public String addtocart(Product p) {
-        for (Cart item : listcart) {
-            if (item.getCid().getId() == p.getId()) {
-                item.setQuantity(item.getQuantity() + 1);
-                return "index";
-            }
-        }
-        Cart c = new Cart();
-        c.setCid(p);
-        c.setQuantity(1);
-        listcart.add(c);
-        return "index";
-    }
+    
 
     public String addtocartoncart(Product cp) {
         for (Cart item : listcart) {
@@ -112,32 +94,21 @@ public class AddCartControl extends HttpServlet {
         return "shop-shopping-cart.jsp";
     }
 
-    public String detailaddcart(Product p) {
+    public String detailaddcart(Product p, String sname, int quantity) {
+        String s = "";
         for (Cart item : listcart) {
-            if (item.getCid().getId() == p.getId()) {
-                item.setQuantity(item.getQuantity() + 1);
+            s = item.getSize();
+            if (item.getCid().getId() == p.getId() && s.equals(sname) == true) {
+                item.setQuantity(item.getQuantity() + quantity);
                 return "shop-shopping-cart.jsp";
             }
         }
         Cart c = new Cart();
         c.setCid(p);
-        c.setQuantity(1);
+        c.setQuantity(quantity);
+        c.setSize(sname);
         listcart.add(c);
         return "shop-shopping-cart.jsp";
-    }
-
-    public String hometocart(Product p) {
-        for (Cart item : listcart) {
-            if (item.getCid().getId() == p.getId()) {
-                item.setQuantity(item.getQuantity() + 1);
-                return "home";
-            }
-        }
-        Cart c = new Cart();
-        c.setCid(p);
-        c.setQuantity(1);
-        listcart.add(c);
-        return "home";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

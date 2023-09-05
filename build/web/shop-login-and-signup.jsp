@@ -13,7 +13,7 @@
     <!-- Head BEGIN -->
     <head>
         <meta charset="utf-8">
-        <title>Login</title>
+        <title>Login | NF-Shop</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -53,8 +53,9 @@
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="assets/pages/css/LoginCSS.css">
+        <link rel="stylesheet" href="assets/pages/css/LoginCSS.css" type="text/css">
         <!-- Theme styles END -->
+        
     </head>
     <!-- Head END -->
     <body>
@@ -63,12 +64,12 @@
             <div class="login form">
                 <header>Login</header>
                 <form action="login" method="post">
-                    <input name="user" type="text" placeholder="Enter your account">
-                    <input name="pass" type="password" placeholder="Enter your password">
-                    <div class="text-danger" style="font-size: 16px;">
+                    <input style="height: 45px; padding: 0 10px" name="user" type="text" placeholder="Enter your account" required>
+                    <input style="height: 45px; padding: 0 10px" name="pass" type="password" placeholder="Enter your password" required>
+                    <div class="text-danger" id="close-3s" style="font-size: 16px;">
                         <p><b>${messDanger}</b></p>
                     </div>
-                    <a href="#">Forgot password?</a>
+                    <a href="shop-forgotpassword.jsp">Forgot password?</a>
                     <input type="submit" class="button" value="Login">
                 </form>
                 <div class="signup">
@@ -80,21 +81,22 @@
             <div class="registration form">
                 <header>Signup</header>
                 <form action="signup" method="post">
-                    <input name="user" type="text" placeholder="Enter your account">
-                    <input name="pass" type="password" placeholder="Create a password">
-                    <input name="repass" type="password" placeholder="Confirm your password">
-                    <input name="fullname" type="text" placeholder="Enter your fullname">
-                    <input name="phone" type="tel" placeholder="Enter your phone">
+                    <input style="height: 30px; padding: 0 10px" class="form-control " name="user" type="text" placeholder="Enter your account" required>
+                    <input style="height: 30px; padding: 0 10px" class="form-control " name="pass" type="password" placeholder="Create a password" required>
+                    <input style="height: 30px; padding: 0 10px" class="form-control " name="repass" type="password" placeholder="Confirm your password" required>
+                    <input style="height: 30px; padding: 0 10px" class="form-control " name="fullname" type="text" placeholder="Enter your fullname" required>
+                    <input style="height: 30px; padding: 0 10px" class="form-control " name="phone" type="tel" placeholder="Enter your phone" required>
+                    <input style="height: 30px; padding: 0 10px" class="form-control " name="email" type="email" placeholder="Enter your Email" required>
                     <div class="form-group">
-                        <select class="form-group" id="city" name="city">
+                        <select class="form-group" id="city" name="city" required>
                             <option class="form-control" value="" selected>Chọn tỉnh thành</option>           
                         </select>
                         <br>
-                        <select class="form-group" id="district" name="district">
+                        <select class="form-group" id="district" name="district" required>
                             <option class="form-control" value="" selected>Chọn quận huyện</option>
                         </select>
                         <br>
-                        <select class="form-group" id="ward" name="ward">
+                        <select class="form-group" id="ward" name="ward" required>
                             <option class="form-control" value="" selected>Chọn phường xã</option>
                         </select>
                     </div>  
@@ -162,5 +164,15 @@
                 };
             }
         </script>
+        <script>
+            // Lấy đối tượng thẻ div bằng ID
+            var div = document.getElementById("close-3s");
+
+            // đặt thời gian chờ 10 giây và sau đó ẩn thẻ div
+            setTimeout(function () {
+                div.style.display = "none";
+            }, 3000);
+        </script>
+
     </body>
 </html>

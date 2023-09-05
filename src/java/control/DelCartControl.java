@@ -45,15 +45,14 @@ public class DelCartControl extends HttpServlet {
                 case "DelCart":
                     code = request.getParameter("code");
                     del = dao.getProductByID(code);
-                    Product p = new Product(Integer.parseInt(code), del.getName(), del.getImage(), del.getPrice(), del.getTitle(), del.getDescription());
-
+                    Product p = new Product(Integer.parseInt(code), del.getName(), del.getImage(), del.getCost(), del.getSale(), del.getPrice(), del.getQuantity(), del.getTitle(), del.getDescription());
                     removecart(p);
                     response.sendRedirect("shop-shopping-cart.jsp");
                     break;
                 case "DelCartP":
                     code = request.getParameter("code");
                     del = dao.getProductByID(code);
-                    Product pp = new Product(Integer.parseInt(code), del.getName(), del.getImage(), del.getPrice(), del.getTitle(), del.getDescription());
+                    Product pp = new Product(Integer.parseInt(code), del.getName(), del.getImage(), del.getCost(), del.getSale(), del.getPrice(), del.getQuantity(), del.getTitle(), del.getDescription());
 
                     removecartP(pp);
                     response.sendRedirect("shop-shopping-cart.jsp");

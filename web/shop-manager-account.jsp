@@ -59,6 +59,20 @@
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
         <!-- Theme styles END -->
+        <style>
+            .border-top-primary{
+                border-top: #e94d1c solid 2px;
+            }
+
+            .text-color-primary{
+                color: #e94d1c;
+            }
+            
+            .table-container-mh800{
+                max-height: 400px; /* Chiều cao tối đa của bảng */
+                overflow: auto; /* Hiển thị thanh cuộn khi bảng vượt quá kích thước đã định */
+            }
+        </style>
     </head>
     <!-- Head END -->
 
@@ -72,12 +86,12 @@
                     <div class="row margin-bottom-40">
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
-                            <h1>Account product</h1>
-                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add Account</button>
+                            <h1>Manager Account</h1>
+                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary margin-bottom-10" ><i class="fa fa-plus"></i> Add Account</button>
                             <div class="goods-page">
-                                <div class="goods-data clearfix">
-                                    <div class="table-wrapper-responsive">
-                                        <table summary="Manager Product">
+                                <div class="goods-data clearfix border-top-primary">
+                                    <div class="table-wrapper-responsive table-container-mh800">
+                                        <table summary="Manager Account">
                                             <tr>
                                                 <th class="goods-page-user"><strong>USERNAME</strong></th>
                                                 <th class="goods-page-pass"><strong>PASSWORD</strong></th>
@@ -129,42 +143,7 @@
                                         <%
                                             }
                                         %>
-                                        <%--
-                                        <c:forEach items="${listA}" var="o">
-                                            <tr>
-                                                <td class="goods-page-user">
-                                                    <strong>${o.user}</strong>
-                                                </td>
-                                                <td class="goods-page-pass">
-                                                    <strong>${o.pass}</strong>
-                                                </td>
-                                                <td class="goods-page-issel">
-                                                    <c:if test="${o.isSell == 1}">
-                                                        <strong style="color: lime;">YES</strong>
-                                                    </c:if>
-                                                    <c:if test="${o.isSell == 0}">
-                                                        <strong style="color: blue;">NO</strong>
-                                                    </c:if>
-                                                </td>
-                                                <td class="goods-page-admin">
-                                                    <c:if test="${o.isAdmin == 1}">
-                                                        <strong style="color: lime;">YES</strong>
-                                                    </c:if>
-                                                    <c:if test="${o.isAdmin == 0}">
-                                                        <strong style="color: blue;">NO</strong>
-                                                    </c:if>
-                                                </td>
 
-                                                <td class="edit-goods-col">
-                                                    <a href="loadaccount?aid=${o.id}"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
-                                                </td> 
-                                                <td class="del-goods-col">
-                                                    <a href="deleteacc?aid=${o.id}"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
-                                                </td>
-
-                                            </tr>
-                                        </c:forEach>
-                                        --%>
 
 
                                     </table>
@@ -172,6 +151,14 @@
                             </div>
                         </div>
                     </div>
+                    <!--                    <div class="col-md-8 col-sm-8 pull-right">
+                    <c:forEach begin="1" end="10" var="i">
+                        <ul class="pagination">
+                            <li><a style="font-weight: 900;" href="index?page=${i}">${i}</a></li>
+                        </ul>
+                    </c:forEach>
+
+                </div>-->
                     <!-- END CONTENT -->
                 </div>
                 <!-- add Modal HTML -->
@@ -189,7 +176,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input name="password" type="text" class="form-control" required>
+                                        <input name="password" type="password" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Sellstrators</label>
@@ -214,6 +201,10 @@
                                     <div class="form-group">
                                         <label>Phone</label>
                                         <input name="phone" type="tel" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input name="email" type="email" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <select class="form-group" id="city" name="city">

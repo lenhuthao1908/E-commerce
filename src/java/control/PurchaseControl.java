@@ -55,11 +55,13 @@ public class PurchaseControl extends HttpServlet {
             Account acc = (Account) session.getAttribute("acc");
 
 //            int acc = Integer.parseInt(request.getParameter("acc"));
+            int ship = 30000;
             double total = 0;
             DAO dao = new DAO();
             for (int i = 0; i < AddCartControl.listcart.size(); i++) {
                 Cart cart = AddCartControl.listcart.get(i);
-                total = total + (cart.getQuantity() * cart.getCid().getPrice());
+                
+                total = total + (cart.getQuantity() * cart.getCid().getPrice()) + ship;
             }
 
             if (AddCartControl.listcart.size() > 0) {
@@ -75,7 +77,8 @@ public class PurchaseControl extends HttpServlet {
                 bill.setWard(ward);
                 bill.setDesbill(desbill);
                 dao.AddOrderBill(bill);
-            }
+            }else{
+                response.sendRedirect("shop-shopping-cart.jsp");}
             listcart.removeAll(listcart);
             response.sendRedirect("home");
         } catch (Exception e) {

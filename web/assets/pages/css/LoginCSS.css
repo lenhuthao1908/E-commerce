@@ -44,10 +44,10 @@ body{
   margin-bottom: 1.5rem;
 }
  .form input{
-   height: 60px;
+   height: 30px;
    width: 100%;
-   padding: 0 15px;
-   font-size: 17px;
+   padding: 0 10px;
+   font-size: 16px;
    margin-bottom: 1.3rem;
    border: 1px solid #ddd;
    border-radius: 6px;

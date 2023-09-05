@@ -10,31 +10,45 @@ package entity;
  * @author nhuth
  */
 public class Product {
+
     private int id;
     private String name;
     private String image;
+    private double cost;
+    private int sale;
     private double price;
+    private int quantity;
     private String title;
     private String description;
 
     public Product() {
     }
 
-    public Product(String name, String image, double price, String title, String description) {
+    public Product(String name, String image, double cost, int sale, double price, int quantity, String title, String description) {
         this.name = name;
         this.image = image;
+        this.cost = cost;
+        this.sale = sale;
         this.price = price;
+        this.quantity = quantity;
         this.title = title;
         this.description = description;
     }
 
-    public Product(int id, String name, String image, double price, String title, String description) {
+    public Product(int id, String name, String image, double cost, int sale, double price, int quantity, String title, String description) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.cost = cost;
+        this.sale = sale;
         this.price = price;
+        this.quantity = quantity;
         this.title = title;
         this.description = description;
+    }
+
+    public Product(int totalQuantity, int totalPrice, int totalProduct, int totalSale) {
+        
     }
 
     public int getId() {
@@ -61,12 +75,36 @@ public class Product {
         this.image = image;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public int getSale() {
+        return sale;
+    }
+
+    public void setSale(int sale) {
+        this.sale = sale;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getTitle() {
@@ -84,13 +122,11 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", image=" + image + ", price=" + price + ", title=" + title + ", description=" + description + '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", image=" + image + ", cost=" + cost + ", sale=" + sale + ", price=" + price + ", quantity=" + quantity + ", title=" + title + ", description=" + description + '}';
     }
-    
 
-    
     
 }

@@ -4,6 +4,7 @@
     Author     : nhuth
 --%>
 
+<%@page import="entity.Product"%>
 <%@page import="entity.BillDetail"%>
 <%@page import="java.util.List"%>
 <%@page import="entity.Bill"%>
@@ -63,9 +64,23 @@
         <!-- Theme styles END -->
         <style>  
             td {  
-               font-weight: 600;  
+                font-weight: 600;  
             }  
-             
+
+        </style>
+        <style>
+            .border-top-primary{
+                border-top: #e94d1c solid 2px;
+            }
+
+            .text-color-primary{
+                color: #e94d1c;
+            }
+            
+            .table-container-mh800{
+                max-height: 400px; /* Chiều cao tối đa của bảng */
+                overflow: auto; /* Hiển thị thanh cuộn khi bảng vượt quá kích thước đã định */
+            }
         </style>
     </head>
     <!-- Head END -->
@@ -82,74 +97,91 @@
                         <div class="col-md-12 col-sm-12">
                             <h1>Manager Bill</h1>
                             <div class="goods-page">
-                                <div class="goods-data clearfix">
-                                    <div class="table-wrapper-responsive">
+                                <div class="goods-data clearfix border-top-primary">
+                                    <div class="table-wrapper-responsive table-container-mh800">
                                         <table summary="Manager Bill">
-                                            <tr>
-                                                <th class=""><strong>id</strong></th>
-                                                <th class=""><strong>name</strong></th>
-                                                <th class=""><strong>phone</strong></th>
-                                                <th class=""><strong>address</strong></th>
-                                                <th class=""><strong>Date</strong></th>
-                                                <th class=""><strong>Desbill</strong></th>
-                                                <th class=""><strong>Total</strong></th>
-                                                <th class=""><strong>Status</strong></th>
-                                                <th class="" colspan="2"><strong>Update</strong></th>
-                                            </tr>
+                                                <tr>
+                                                    <th class=""><strong>id</strong></th>
+                                                    <th class=""><strong>name</strong></th>
+                                                    <th class=""><strong>phone</strong></th>
+                                                    <th class=""><strong>address</strong></th>
+                                                    <th class=""><strong>Date</strong></th>
+                                                    <th class=""><strong>Desbill</strong></th>
+                                                    <th class="text-color-primary"><strong>Total</strong></th>
+                                                    <th class=""><strong>Status</strong></th>
+                                                    <th class="" colspan=""><strong>Update</strong></th>
+                                                </tr>
+
                                         <%
                                             DAO dao = new DAO();
                                             List<Bill> list = dao.getAllOrderBill();
 
-                                            for (int i = list.size()-1; i >= 0; i--) {
+                                            for (int i = list.size() - 1; i >= 0; i--) {
                                                 Bill bill = list.get(i);
                                                 List<BillDetail> detail = dao.getBillDetailById(bill.getBill_id());
 
                                         %>
-                                        <tr>
-                                            <td><%= bill.getAcc_id() %></td>
-                                            <td><%= bill.getFullname()%></td>
-                                            <td><%= bill.getPhone1()%> <br> <%= bill.getPhone2()%></td>
-                                            <td><%= bill.getCity()%> <br> <%= bill.getDistrict()%> <br> <%= bill.getWard()%></td>
-                                            <td class=""><%= bill.getDate()%></td>
-                                            <td class="goods-page-description"><%= bill.getDesbill()%></td>
-                                            <td class=""><%= bill.getTotal()%></td>
-                                            <td>
-                                                <%
-                                                    if (bill.getStatus() == 0) {
-                                                %>
-                                                <p style="color: black">Cancel order</p>
-                                                <%
-                                                    }
-                                                %>
-                                                <%
-                                                    if (bill.getStatus() == 1) {
-                                                %>
-                                                <p style="color: red">Processing</p>
-                                                <%
-                                                    }
-                                                %>
-                                                <%
-                                                    if (bill.getStatus() == 2) {
-                                                %>
-                                                <p style="color: blue">Delivery</p>
-                                                <%
-                                                    }
-                                                %>
-                                                <%
-                                                    if (bill.getStatus() == 3) {
-                                                %>
-                                                <p style="color: lime">Successful Delivery</p>
-                                                <%
-                                                    }
-                                                %>
-                                            </td>
-                                            <td class="edit-goods-col">
-                                                <a href="loadbill?bill=<%= bill.getBill_id() %>"  class="uploader" data-toggle="modal"><i class="fa fa-repeat"></i></a>
-                                            </td> 
-                                        </tr>
-                                        <tr>
-                                            <td colspan="10"><%= detail.toString()%> <br></td>
-                                        </tr>
+                                            <tr style="background: #FFF9EE">
+                                                <td style="font-weight: 1000; font-size: 20px"><%= bill.getAcc_id()%></td>
+                                                <td><%= bill.getFullname()%></td>
+                                                <td><%= bill.getPhone1()%> <br> <%= bill.getPhone2()%></td>
+                                                <td><%= bill.getCity()%> <br> <%= bill.getDistrict()%> <br> <%= bill.getWard()%></td>
+                                                <td class=""><%= bill.getDate()%></td>
+                                                <td class="goods-page-description"><%= bill.getDesbill()%></td>
+                                                <td class="text-color-primary"><%= bill.getTotal()%></td>
+                                                <td>
+                                                    <%
+                                                        if (bill.getStatus() == 0) {
+                                                    %>
+                                                    <p style="color: black">Cancel order</p>
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%
+                                                        if (bill.getStatus() == 1) {
+                                                    %>
+                                                    <p style="color: red">Processing</p>
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%
+                                                        if (bill.getStatus() == 2) {
+                                                    %>
+                                                    <p style="color: blue">Delivery</p>
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%
+                                                        if (bill.getStatus() == 3) {
+                                                    %>
+                                                    <p style="color: lime">Successful Delivery</p>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </td>
+                                                <td class="edit-goods-col">
+                                                    <a href="loadbill?bill=<%= bill.getBill_id()%>"  class="uploader" data-toggle="modal"><i class="fa fa-repeat"></i></a>
+                                                </td> 
+                                            </tr>
+                                        <%
+                                            for (int j = 0; j < detail.size(); j++) {
+                                                BillDetail b = detail.get(j);
+                                                Product p = dao.getProductByID(Integer.toString(b.getPid()));
+                                        %>
+                                            <tr style="background: #fcfcfc">
+                                                <td class="goods-page-image" colspan="1">
+                                                    <img src="image/<%= p.getImage()%>" alt="Product image">
+                                                </td>
+                                                <td colspan="12"> 
+                                                    <strong>ID Product:</strong> <%= p.getId()%> <br>
+                                                    <strong style="color: green">Name Product:</strong> <%= p.getName()%> <br>
+                                                    <strong class="text-primary">Quantity:</strong> <%= b.getQuantity()%> <br>
+                                                    <strong class="text-color-primary">Price:</strong> <%= p.getPrice()%> VND
+                                                </td>
+                                            </tr>
+                                        <%
+                                            }
+                                        %>    
                                         <%
                                             }
 
@@ -159,6 +191,14 @@
                             </div>
                         </div>
                     </div>
+                    <!--                    <div class="col-md-8 col-sm-8 pull-right">
+                    <c:forEach begin="1" end="10" var="i">
+                        <ul class="pagination">
+                            <li><a style="font-weight: 900;" href="index?page=${i}">${i}</a></li>
+                        </ul>
+                    </c:forEach>
+
+                </div>-->
                     <!-- END CONTENT -->
                 </div>
             </div>
@@ -199,6 +239,7 @@
                 Layout.initSliderRange();
             });
         </script>
+        
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>
     <!-- END BODY -->

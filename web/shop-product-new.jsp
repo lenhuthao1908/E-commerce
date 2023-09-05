@@ -12,5 +12,6 @@
         <a href=""><img src="image/${o.image}" alt="Some Shoes in Animal with Cut Out"></a>
         <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
         <div class="price">${o.price}</div>
+        
     </div>
 </c:forEach>

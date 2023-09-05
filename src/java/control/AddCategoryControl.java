@@ -35,11 +35,10 @@ public class AddCategoryControl extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-            int cid = Integer.parseInt(request.getParameter("cid"));
             String cname = request.getParameter("cname");
 
             DAO dao = new DAO();
-            dao.insertCategory(cid, cname);
+            dao.insertCategory(cname);
             response.sendRedirect("managercc");
         } catch (IOException e) {
         }

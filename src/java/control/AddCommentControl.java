@@ -38,16 +38,26 @@ public class AddCommentControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String cm_user = request.getParameter("comment_user");
-        int cm_pid = Integer.parseInt(request.getParameter("comment_pid"));
-        int cm_aid = Integer.parseInt(request.getParameter("comment_aid"));
-        String cm_des = request.getParameter("comment_des");
-        int cm_star = Integer.parseInt(request.getParameter("comment_star"));
-        String pid = request.getParameter("comment_pid");
-        String link = "./detail?pid=" + pid;
-        DAO dao = new DAO();
-        dao.addcomment(cm_pid, cm_aid, cm_user, cm_des, cm_star);
-        response.sendRedirect(link);
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        if (acc != null) {
+            String cm_user = request.getParameter("comment_user");
+            int cm_pid = Integer.parseInt(request.getParameter("comment_pid"));
+            int cm_aid = Integer.parseInt(request.getParameter("comment_aid"));
+            String cm_des = request.getParameter("comment_des");
+            int cm_star = Integer.parseInt(request.getParameter("comment_star"));
+            String pid = request.getParameter("comment_pid");
+            String link = "./detail?pid=" + pid;
+            DAO dao = new DAO();
+            dao.addcomment(cm_pid, cm_aid, cm_user, cm_des, cm_star);
+            response.sendRedirect(link);
+        } else {
+            String pid = request.getParameter("comment_pid");
+
+            String link = "./detail?pid=" + pid;
+            request.setAttribute("err", "You must be logged in to add comments!");
+            request.getRequestDispatcher(link).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

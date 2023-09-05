@@ -17,6 +17,7 @@ public class Account {
     private int isAdmin;
     private String fullname;
     private int phone;
+    private String email;
     private String City;
     private String District;
     private String Ward;
@@ -24,7 +25,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int id, String user, String pass, int isSell, int isAdmin, String fullname, int phone, String City, String District, String Ward) {
+    public Account(int id, String user, String pass, int isSell, int isAdmin, String fullname, int phone, String email, String City, String District, String Ward) {
         this.id = id;
         this.user = user;
         this.pass = pass;
@@ -32,6 +33,7 @@ public class Account {
         this.isAdmin = isAdmin;
         this.fullname = fullname;
         this.phone = phone;
+        this.email = email;
         this.City = City;
         this.District = District;
         this.Ward = Ward;
@@ -93,6 +95,14 @@ public class Account {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getCity() {
         return City;
     }
@@ -119,11 +129,8 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", isSell=" + isSell + ", isAdmin=" + isAdmin + ", fullname=" + fullname + ", phone=" + phone + ", City=" + City + ", District=" + District + ", Ward=" + Ward + '}';
+        return "Account{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", isSell=" + isSell + ", isAdmin=" + isAdmin + ", fullname=" + fullname + ", phone=" + phone + ", email=" + email + ", City=" + City + ", District=" + District + ", Ward=" + Ward + '}';
     }
 
     
-    
-
-    
-}
+}   

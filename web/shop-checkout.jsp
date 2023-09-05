@@ -15,7 +15,7 @@
     <!-- Head BEGIN -->
     <head>
         <meta charset="utf-8">
-        <title>Checkout | Metronic Shop UI</title>
+        <title>Checkout | NF-Shop</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -80,30 +80,33 @@
                             <input value="${sessionScope.acc.user}" name="user" type="text" class="form-control" readonly required>
                         </div>
                         <div class="form-group">
+                            <label>Email</label>
+                            <input value="${sessionScope.acc.email}" name="email" type="email" class="form-control" readonly required>
+                        </div>
+                        <div class="form-group">
                             <label>Phone 1</label>
-                            <input value="${sessionScope.acc.phone}" name="phone1" type="text" class="form-control" readonly required>
-
+                            <input value="${sessionScope.acc.phone}" name="phone1" type="tel" class="form-control" readonly required>
                         </div>
                         <div class="form-group">
                             <label>Phone 2</label>
-                            <input name="phone2" type="text" class="form-control" placeholder="Enter your phone delivery" required>
+                            <input name="phone2" type="tel" class="form-control" placeholder="Enter your phone delivery" required>
                         </div>
                         <div class="form-group">
-                            <select id="city" name="city">
+                            <select id="city" name="city" required>
                                 <option value="" selected>Chọn tỉnh thành</option>           
                             </select>
 
-                            <select id="district" name="district">
+                            <select id="district" name="district" required>
                                 <option value="" selected>Chọn quận huyện</option>
                             </select>
 
-                            <select id="ward" name="ward">
+                            <select id="ward" name="ward" required>
                                 <option value="" selected>Chọn phường xã</option>
                             </select>
                         </div>  
                         <div class="form-group">
                             <label>Description delivery</label>
-                            <textarea name="desbill" rows="3" class="form-control" placeholder="Enter your delivery address"></textarea>
+                            <textarea name="desbill" rows="3" class="form-control" placeholder="Enter your delivery address" ></textarea>
                         </div>
                         <div class="modal-body">
                             <table class="col-md-12 col-sm-12">
@@ -115,14 +118,15 @@
                                 </tr>
                                 <%
                                     if (AddCartControl.listcart != null) {
-                                        int ship = 30;
+                                        int ship = 30000;
+                                        double totaldetail = 0;
                                         double total = 0;
                                 %>
                                 <%
                                     for (int i = 0; i < AddCartControl.listcart.size(); i++) {
                                         Cart cart = AddCartControl.listcart.get(i);
-
-                                        total = total + (cart.getQuantity() * cart.getCid().getPrice());
+                                        totaldetail = totaldetail + (cart.getQuantity() * cart.getCid().getPrice());
+                                        total = totaldetail + ship;
                                 %>
                                 <tr>
                                     <td class="goods-page-name" colspan="2" ><%=cart.getCid().getName()%></td>
@@ -138,7 +142,7 @@
                                 <tr>
                                     <th class="goods-page-name" colspan="2">TOTAL</th>
                                     <th class="goods-page-quantity" colspan="1"></th>
-                                    <th class="goods-page-price" colspan="1"><%= total%></th>
+                                    <th class="goods-page-price" colspan="1"><%= totaldetail%></th>
                                 </tr>
                                 <tr>
                                     <th class="goods-page-name" colspan="2">SHIP</th>
@@ -148,7 +152,7 @@
                                 <tr>
                                     <th class="goods-page-name" colspan="2">TOTAL</th>
                                     <th class="goods-page-quantity" colspan="1"></th>
-                                    <th class="goods-page-price" colspan="1"><%= total + ship%></th>
+                                    <th class="goods-page-price" colspan="1"><%= total%></th>
                                 </tr>
 
                             </table>
@@ -159,7 +163,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel">
+                            <a href="shop-shopping-cart.jsp"><input type="button" class="btn btn-close" data-dismiss="modal" value="Cancel" style="color: #000;"></a>
                             <input type="submit" class="btn btn-primary" value="Checkout">
                         </div>
                     </div>

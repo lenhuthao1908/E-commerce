@@ -66,6 +66,20 @@
 
 
         <!-- Theme styles END -->
+        <style>
+            .border-top-primary{
+                border-top: #e94d1c solid 2px;
+            }
+
+            .text-color-primary{
+                color: #e94d1c;
+            }
+
+            .table-container-mh800{
+                max-height: 400px; /* Chiều cao tối đa của bảng */
+                overflow: auto; /* Hiển thị thanh cuộn khi bảng vượt quá kích thước đã định */
+            }
+        </style>
     </head>
     <!-- Head END -->
 
@@ -80,10 +94,10 @@
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
                             <h1>Manager product</h1>
-                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary" ><i class="fa fa-plus"></i> Add product</button>
+                            <button href="#addEmployeeModal"  data-toggle="modal" class="btn btn-primary margin-bottom-10" ><i class="fa fa-plus"></i> Add Product</button>
                             <div class="goods-page">
-                                <div class="goods-data clearfix">
-                                    <div class="table-wrapper-responsive">
+                                <div class="goods-data clearfix border-top-primary">
+                                    <div class="table-wrapper-responsive table-container-mh800">
                                         <table summary="Manager Product">
                                             <tr>
                                                 <th class="goods-page-id bold"><strong>ID</strong></th>
@@ -91,6 +105,7 @@
                                                 <th class="goods-page-description bold"><strong>Description</strong></th>
                                                 <th class="goods-page-ref-no bold"><strong>Title</strong></th>
                                                 <th class="goods-page-price bold"><strong>Price</strong></th>
+                                                <th class="goods-page-quantity bold"><strong>Quantity</strong></th>
                                             </tr>
                                         <%
                                             Account a = (Account) session.getAttribute("acc");
@@ -105,7 +120,7 @@
                                         %>
                                         <tr>
                                             <td class="goods-page-id">
-                                                <strong><%= product.getId() %></strong>
+                                                <strong><%= product.getId()%></strong>
                                             </td>
                                             <td class="goods-page-image">
                                                 <a href="image/<%= product.getImage()%>"><img src="image/<%= product.getImage()%>" alt="Berry Lace Dress"></a>
@@ -114,10 +129,13 @@
                                                 <p><%= product.getDescription()%></p>
                                             </td>
                                             <td>
-                                                <h3><a href="detail?pid=<%= product.getId()%>"><%= product.getName()%></a></h3>
+                                                <h3><%= product.getName()%></h3>
                                             </td>
                                             <td class="goods-page-price">
                                                 <strong><%= product.getPrice()%></strong>
+                                            </td>
+                                            <td>
+                                                <h3 class="text-primary" style="font-weight: 1000;"><%= product.getQuantity()%></h3>
                                             </td>
                                             <td class="edit-goods-col">
                                                 <a href="loadproduct?pid=<%= product.getId()%>"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
@@ -129,34 +147,8 @@
                                         <%
                                             }
                                         %>
-                                        <%-- 
-                                        <c:forEach items="${listP}" var="o">
-                                            <tr>
-                                                <td class="goods-page-id">
-                                                    <strong>${o.id}</strong>
-                                                </td>
-                                                <td class="goods-page-image">
-                                                    <a href="image/${o.image}"><img src="image/${o.image}" alt="Berry Lace Dress"></a>
-                                                </td>
-                                                <td class="goods-page-description">
-                                                    <p>${o.description}</p>
-                                                </td>
-                                                <td>
-                                                    <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
-                                                </td>
-                                                <td class="goods-page-price">
-                                                    <strong>${o.price}</strong>
-                                                </td>
-                                                <td class="edit-goods-col">
-                                                    <a href="loadproduct?pid=${o.id}"  class="edit" data-toggle="modal"><i class="fa fa-pencil"></i></a>
-                                                </td> 
-                                                <td class="del-goods-col">
-                                                    <a href="delete?pid=${o.id}"  data-toggle="modal"><i class="del-goods" data-toggle="tooltip" title="Delete"></i></a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach> 
-                                        --%>
-                                        
+
+
                                     </table>
                                 </div>
                             </div>
@@ -182,8 +174,16 @@
                                         <input name="image" type="file" class="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Price</label>
-                                        <input name="price" type="text" class="form-control" required>
+                                        <label>Cost</label>
+                                        <input name="cost" type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Sale</label>
+                                        <input name="sale" type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input name="quantity" type="text" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Title</label>
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Category</label>
-                                        <select name="category" class="form-select" aria-label="Default select example">
+                                        <select name="category" class="form-select" aria-label="Default select example" required>
                                             <c:forEach items="${listCC}" var="o">
                                                 <option value="${o.cid}">${o.cname}</option>
                                             </c:forEach>

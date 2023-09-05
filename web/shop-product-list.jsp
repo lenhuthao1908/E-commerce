@@ -66,16 +66,16 @@
 
             <div class="title-wrapper">
                 <div class="container"><div class="container-inner">
-                        <h1><span>N</span>-<span>-F</span>ashion</h1>
+                        <h1><span>N</span>-<span>F</span>ashion</h1>
                         <em>Disruptive fashion - Cool style</em>
                     </div></div>
             </div>
 
             <div class="main">
                 <div class="container">
-                    <ul class="breadcrumb">
+                    <ul class="breadcrumb" style="font-weight: 700; font-size: 24px">
                         <li><a href="home">Home</a></li>
-                        <li><a href="index">Store</a></li>
+                        <li class="active"><a href="index">Store</a></li>
                         <li class="active">${o.name}</li>
                 </ul>
                 <!-- BEGIN SIDEBAR & CONTENT -->
@@ -111,46 +111,50 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p><b>PRODUCT</b></p> 
+
                             </div>
                             <!-- BEGIN PRODUCT LIST -->
                             <div class="row product-list">
                             <c:forEach items="${listP}" var="o">
                                 <!-- PRODUCT ITEM START -->
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="product-item">
+                                    <div class="product-item" style="width: 250px; height: 400px">
                                         <div class="pi-img-wrapper">
-                                            <img src="image/${o.image}" style="width: 270px; height: 300px;" class="img-responsive" alt="Product">
+                                            <img src="image/${o.image}" style="width: 300px; height: 300px;" class="img-responsive" alt="Product">
                                             <div>
                                                 <a href="image/${o.image}" class="btn btn-default fancybox-button">Zoom</a>
                                                 <!--<a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>-->
                                             </div>
                                         </div>
                                         <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
-                                        <div class="pi-price">${o.price}</div>
-                                        <a href="addcart?action=AddCart&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>
+                                        <div class="pi-price buttom">
+                                            ${o.price} VND &ensp; 
+                                            <c:if test="${o.sale != 0}">
+                                                <del class="price-availability-block"><span> ${o.cost}</span> VND</del> 
+                                            </c:if>
+                                        
+                                        </div>
+<!--                                        <a href="addcart?action=AddCart&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>-->
+                                        <c:if test="${o.sale != 0}">
+                                            <div class="sticker sticker-sale"></div>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <!-- PRODUCT ITEM END -->
                             </c:forEach>
                         </div>
                         <!-- END PRODUCT LIST -->
-                        <!-- BEGIN PAGINATOR -->
-                        <div class="row">
-                            <!--<div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>-->
-                            <div class="col-md-8 col-sm-8 pull-right">
-                                <c:forEach begin="1" end="${endP}" var="i">
-                                    <ul class="pagination">
-                                        <li><a style="font-weight: 900;" href="index?page=${i}">${i}</a></li>
-                                    </ul>
-                                </c:forEach>
 
-                            </div>
+                        <div class="col-md-8 col-sm-8 pull-right">
+                            <c:forEach begin="1" end="${endP}" var="i">
+                                <ul class="pagination">
+                                    <li><a style="font-weight: 900;" href="index?page=${i}">${i}</a></li>
+                                </ul>
+                            </c:forEach>
+
                         </div>
                         <!-- END PAGINATOR -->
                     </div>
-
-
                 </div>
                 <!-- END PAGINATOR -->
             </div>
@@ -180,6 +184,7 @@
         <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
         <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> <!-- ajax -->
 
         <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
         <script type="text/javascript">

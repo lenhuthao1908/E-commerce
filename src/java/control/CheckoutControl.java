@@ -48,7 +48,13 @@ public class CheckoutControl extends HttpServlet {
         }else{
             // xu ly bill & billdetail
             
-            response.sendRedirect("shop-checkout.jsp");
+            if(AddCartControl.listcart.size() > 0){
+                response.sendRedirect("shop-checkout.jsp");
+            }
+            else{
+                request.setAttribute("mess", "No product yet, please add product to make checkout feature!!!");
+                request.getRequestDispatcher("shop-shopping-cart.jsp").forward(request, response);
+            }
         }
 
 //        listcart.removeAll(listcart);

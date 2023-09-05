@@ -158,17 +158,19 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                            <div class=\"product-page\">\n");
       out.write("                            ");
 
+                                int pid = Integer.parseInt(request.getParameter("pid"));
+
                                 String id = request.getParameter("pid");
                                 String cateID = request.getParameter("cid");
 
                                 DAO dao = new DAO();
+                                List<Comment> list = dao.getCommentById(pid);
                                 Product p = dao.getProductByID(id);
                                 List<Category> listC = dao.getAllCategory();
                                 List<Product> top3lastP = dao.getTop3Last();
                                 List<Product> top4lowP = dao.getTop4Lowprice();
                                 List<size> listS = dao.getALLSize();
 
-                                request.setAttribute("detail", p);
                                 request.setAttribute("listCC", listC);
                                 request.setAttribute("listS", listS);
                                 request.setAttribute("p3l", top3lastP);
@@ -189,88 +191,92 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                                </div>\n");
       out.write("                                <div class=\"col-md-6 col-sm-6\">\n");
       out.write("                                    <h1>");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.print( p.getName());
       out.write("</h1>\n");
       out.write("                                    <div class=\"price-availability-block clearfix\">\n");
       out.write("                                        <div class=\"price\">\n");
       out.write("                                            <strong><span>$</span>");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.price}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.print( p.getPrice());
       out.write("</strong>\n");
       out.write("                                        </div>\n");
       out.write("                                        <div class=\"availability\">\n");
       out.write("                                            Product ID: <strong>");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.print( p.getId());
       out.write("</strong>\n");
       out.write("                                        </div>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"description\">\n");
       out.write("                                        <p>");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.description}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(".</p>\n");
+      out.print( p.getDescription());
+      out.write("</p>\n");
       out.write("                                    </div>\n");
-      out.write("                                    <div class=\"product-page-options\">\n");
-      out.write("                                        <div class=\"pull-left\">\n");
-      out.write("                                            <label class=\"control-label\">Size:</label>\n");
-      out.write("                                            <select class=\"form-control input-sm\">\n");
-      out.write("                                                ");
+      out.write("                                    <form action=\"addcart?action=AddToCartOndetail\">\n");
+      out.write("                                        <div class=\"product-page-options\">\n");
+      out.write("                                            <div class=\"pull-left\">\n");
+      out.write("                                                <label class=\"control-label\">Size:</label>\n");
+      out.write("                                                <select class=\"form-control input-sm\" name=\"size\">\n");
+      out.write("                                                    ");
       if (_jspx_meth_c_forEach_0(_jspx_page_context))
         return;
       out.write("\n");
-      out.write("                                            </select>\n");
+      out.write("                                                </select>\n");
+      out.write("                                            </div>\n");
       out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"product-page-cart\">\n");
-      out.write("                                        <div class=\"product-quantity\">\n");
-      out.write("                                            <input name=\"quantity\" id=\"product-quantity\" type=\"text\" value=\"1\" readonly class=\"form-control input-sm\">\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <a href=\"addcart?action=AddToCartOndetail&code=");
+      out.write("                                        \n");
+      out.write("                                        <div class=\"product-page-cart\">\n");
+      out.write("                                            <div class=\"product-quantity\">\n");
+      out.write("                                                <input name=\"quantity\" id=\"product-quantity\" type=\"text\" value=\"1\" readonly class=\"form-control input-sm\">\n");
+      out.write("                                            </div>\n");
+      out.write("                                            <!--<a href=\"addcart?action=AddToCartOndetail&code=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\" class=\"btn btn-default add2cart btn-primary\">Add to cart</a>\n");
-      out.write("                                    </div>\n");
+      out.write("\" class=\"btn btn-default add2cart btn-primary\">Add to cart</a>-->\n");
+      out.write("                                            <button name=\"code\" type=\"submit\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">add to cart</button>\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </form>\n");
       out.write("                                    ");
-                                        int pid = Integer.parseInt(request.getParameter("pid"));
-                                        List<Comment> list = dao.getCommentById(pid);
+
+
+                                        int total = 0;
                                         int totalstar = 0;
                                         for (int i = list.size() - 1; i >= 0; i--) {
                                             Comment comment = list.get(i);
-                                            totalstar = totalstar + comment.getComment_star();
+                                            total = total + comment.getComment_star();
+                                        }
+
+                                        int n = list.size();
+
+                                        if (list.size() > 0) {
+
+                                            totalstar = total / list.size();
+
+                                        } else {
+                                            totalstar = 0;
                                         }
 
                                     
       out.write("\n");
       out.write("                                    <div class=\"review\">\n");
       out.write("                                        <div class=\"rateit\" data-rateit-value=\"");
-      out.print( totalstar / list.size());
+      out.print( totalstar);
       out.write("\" data-rateit-ispreset=\"true\" data-rateit-readonly=\"true\"></div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <a href=\"#Reviews\">");
+      out.write("                                        <a href=\"#Reviews\">");
       out.print( list.size());
       out.write(" reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href=\"#comment\">Write a review</a>\n");
+      out.write("                                    </div>\n");
+      out.write("\n");
       out.write("                                </div>\n");
-      out.write("                                <ul class=\"social-icons\">\n");
-      out.write("                                    <li><a class=\"facebook\" data-original-title=\"facebook\" href=\"javascript:;\"></a></li>\n");
-      out.write("                                    <li><a class=\"twitter\" data-original-title=\"twitter\" href=\"javascript:;\"></a></li>\n");
-      out.write("                                    <li><a class=\"googleplus\" data-original-title=\"googleplus\" href=\"javascript:;\"></a></li>\n");
-      out.write("                                    <li><a class=\"evernote\" data-original-title=\"evernote\" href=\"javascript:;\"></a></li>\n");
-      out.write("                                    <li><a class=\"tumblr\" data-original-title=\"tumblr\" href=\"javascript:;\"></a></li>\n");
-      out.write("                                </ul>\n");
       out.write("                            </div>\n");
       out.write("\n");
       out.write("                            <div class=\"product-page-content\">\n");
       out.write("                                <ul id=\"myTab\" class=\"nav nav-tabs\">\n");
       out.write("                                    <li><a href=\"#Description\" data-toggle=\"tab\">Description</a></li>\n");
       out.write("                                    <li><a href=\"#Information\" data-toggle=\"tab\">Information</a></li>\n");
-      out.write("                                        ");
-
-
-                                        
       out.write("\n");
       out.write("                                    <li class=\"active\"><a href=\"#Reviews\" data-toggle=\"tab\">Reviews (");
       out.print( list.size());
       out.write(")</a></li>\n");
-      out.write("                                        ");
-
-                                        
       out.write("\n");
       out.write("\n");
       out.write("                                </ul>\n");
@@ -308,26 +314,25 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                                        </table>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"tab-pane fade in active\" id=\"Reviews\">\n");
-      out.write("                                        <!--<p>There are no reviews for this product.</p>-->\n");
       out.write("                                        ");
 
-                                            response.setContentType("text/html;charset=UTF-8");
-                                            request.setCharacterEncoding("UTF-8");
                                             for (int i = list.size() - 1; i >= 0; i--) {
                                                 Comment comment = list.get(i);
+
                                         
       out.write("\n");
       out.write("                                        <div class=\"review-item clearfix\">\n");
       out.write("                                            <div class=\"review-item-submitted\">\n");
       out.write("                                                <a href=\"delcomment?cm_id=");
       out.print( comment.getComment_id());
+      out.write("&pid=");
+      out.print( comment.getComment_pid());
       out.write("\" ><i class=\"del-goods\"title=\"Delete\"></i></a>\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"review-item-submitted\">\n");
       out.write("                                                <strong>");
       out.print( comment.getComment_name());
       out.write("</strong>\n");
-      out.write("                                                <!--<em>30/12/2013 - 07:37</em>-->\n");
       out.write("                                                <div class=\"rateit\" data-rateit-value=\"");
       out.print( comment.getComment_star());
       out.write("\" data-rateit-ispreset=\"true\" data-rateit-readonly=\"true\"></div>\n");
@@ -340,6 +345,7 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                                        </div>\n");
       out.write("                                        ");
 
+
                                             }
 
                                         
@@ -348,10 +354,7 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\n");
       out.write("\n");
       out.write("                                        <!-- BEGIN FORM-->\n");
-      out.write("                                        <div>\n");
-      out.write("                                            <form action=\"addcomment?pid=");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${detail.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\" class=\"reviews-form\" role=\"form\" id=\"comment\">\n");
+      out.write("                                        <form action=\"addcomment\" id=\"comment\">\n");
       out.write("                                            <h2>Write a review</h2>\n");
       out.write("                                            <div class=\"form-group\">\n");
       out.write("                                                <label>Username</label>\n");
@@ -376,12 +379,15 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                                                <input name=\"comment_star\" type=\"range\" value=\"4\" step=\"1\" id=\"backing5\">\n");
       out.write("                                                <div class=\"rateit\" data-rateit-backingfld=\"#backing5\" data-rateit-resetable=\"false\"  data-rateit-ispreset=\"true\" data-rateit-min=\"0\" data-rateit-max=\"5\">\n");
       out.write("                                                </div>\n");
-      out.write("                                            </div>\n");
-      out.write("                                            <div class=\"padding-top-20\">                  \n");
-      out.write("                                                <button type=\"submit\" class=\"btn btn-primary\">Send</button>\n");
-      out.write("                                            </div>\n");
+      out.write("                                                <div class=\"padding-top-20\">                  \n");
+      out.write("                                                    <button type=\"submit\" class=\"btn btn-primary\">Send</button>\n");
+      out.write("                                                </div>\n");
+      out.write("                                                <div class=\"text-warning\" style=\"font-size: 14px;\">\n");
+      out.write("                                                    <p><b>");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${err}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</b></p>\n");
+      out.write("                                                </div>\n");
       out.write("                                        </form>\n");
-      out.write("                                        </div>\n");
       out.write("                                        <!-- END FORM--> \n");
       out.write("                                    </div>\n");
       out.write("                                </div>\n");
@@ -397,22 +403,28 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                </div>\n");
       out.write("                <!-- END CONTENT -->\n");
       out.write("            </div>\n");
-      out.write("            <!-- END SIDEBAR & CONTENT -->\n");
       out.write("\n");
-      out.write("            <!-- BEGIN SIMILAR PRODUCTS -->\n");
-      out.write("            <div class=\"row margin-bottom-40\">\n");
-      out.write("                <div class=\"col-md-12 col-sm-12\">\n");
-      out.write("                    <h2>Product low price under 100 </h2>\n");
-      out.write("                    <div class=\"owl-carousel owl-carousel4\">\n");
-      out.write("                        ");
-      if (_jspx_meth_c_forEach_1(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                    </div>\n");
+      out.write("        </div>\n");
+      out.write("        <div id=\"messagebox\" class=\"modal fade\">\n");
+      out.write("            <div class=\"modal-dialog\">\n");
+      out.write("                <div class=\"modal-content\">\n");
+      out.write("                    <form action=\"messbox\" method=\"\">\n");
+      out.write("                        <div class=\"modal-header\" style=\"background: #e94d1c; color: #FFF\">\t\t\t\t\t\t\n");
+      out.write("                            <h4 class=\"modal-title\">Message</h4>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"modal-body\">\n");
+      out.write("                            <div class=\"form-group\">\n");
+      out.write("                                Message warring!!\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"modal-footer\">\n");
+      out.write("                            <input type=\"submit\" class=\"btn btn-primary\" value=\"Add\">\n");
+      out.write("                        </div>\n");
+      out.write("                    </form>\n");
       out.write("                </div>\n");
-      out.write("                <!-- END SIMILAR PRODUCTS -->\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
+      out.write("\n");
       out.write("\n");
       out.write("        ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "shop-footer.jsp", out, false);
@@ -448,6 +460,11 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                Layout.initTouchspin();\n");
       out.write("                Layout.initUniform();\n");
       out.write("            });\n");
+      out.write("            window.setTimeout(function () {\n");
+      out.write("                $(\".alert\").fadeTo(500, 0).slideUp(500, function () {\n");
+      out.write("                    $(this).remove();\n");
+      out.write("                });\n");
+      out.write("            }, 4000);\n");
       out.write("        </script>\n");
       out.write("        <!-- END PAGE LEVEL JAVASCRIPTS -->\n");
       out.write("    </body>\n");
@@ -482,10 +499,13 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
       if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\n");
-          out.write("                                                    <option>");
+          out.write("                                                        <option value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.sid}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write('"');
+          out.write('>');
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.sname}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</option>\n");
-          out.write("                                                ");
+          out.write("                                                    ");
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -501,68 +521,6 @@ public final class shop_002ditem_jsp extends org.apache.jasper.runtime.HttpJspBa
     } finally {
       _jspx_th_c_forEach_0.doFinally();
       _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
-    }
-    return false;
-  }
-
-  private boolean _jspx_meth_c_forEach_1(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:forEach
-    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_1 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
-    _jspx_th_c_forEach_1.setPageContext(_jspx_page_context);
-    _jspx_th_c_forEach_1.setParent(null);
-    _jspx_th_c_forEach_1.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${p4l}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    _jspx_th_c_forEach_1.setVar("o");
-    int[] _jspx_push_body_count_c_forEach_1 = new int[] { 0 };
-    try {
-      int _jspx_eval_c_forEach_1 = _jspx_th_c_forEach_1.doStartTag();
-      if (_jspx_eval_c_forEach_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
-        do {
-          out.write("\n");
-          out.write("                            <div>\n");
-          out.write("                                <div class=\"product-item\">\n");
-          out.write("                                    <div class=\"pi-img-wrapper\">\n");
-          out.write("                                        <img src=\"");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.image}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\" style=\"width: 270px; height: 300px;\" class=\"img-responsive\" alt=\"Berry Lace Dress\">\n");
-          out.write("                                        <div>\n");
-          out.write("                                            <a href=\"");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.image}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\" class=\"btn btn-default fancybox-button\">Zoom</a>\n");
-          out.write("\n");
-          out.write("                                        </div>\n");
-          out.write("                                    </div>\n");
-          out.write("                                    <h3><a href=\"detail?pid=");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write('"');
-          out.write('>');
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</a></h3>\n");
-          out.write("                                    <div class=\"pi-price\">");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.price}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</div>\n");
-          out.write("                                    <a href=\"javascript:;\" class=\"btn btn-default add2cart\">Add to cart</a>\n");
-          out.write("                                    <div class=\"sticker sticker-new\"></div>\n");
-          out.write("                                </div>\n");
-          out.write("                            </div>\n");
-          out.write("                        ");
-          int evalDoAfterBody = _jspx_th_c_forEach_1.doAfterBody();
-          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
-            break;
-        } while (true);
-      }
-      if (_jspx_th_c_forEach_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-        return true;
-      }
-    } catch (Throwable _jspx_exception) {
-      while (_jspx_push_body_count_c_forEach_1[0]-- > 0)
-        out = _jspx_page_context.popBody();
-      _jspx_th_c_forEach_1.doCatch(_jspx_exception);
-    } finally {
-      _jspx_th_c_forEach_1.doFinally();
-      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_1);
     }
     return false;
   }

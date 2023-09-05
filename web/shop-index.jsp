@@ -75,27 +75,26 @@
                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                     </ol>
-
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <!-- First slide -->
                         <div class="item carousel-item-four active">
-                            
+
                         </div>
 
                         <!-- Second slide -->
                         <div class="item carousel-item-five">
-                            
+
                         </div>
 
                         <!-- Third slide -->
                         <div class="item carousel-item-six">
-                            
+
                         </div>
 
                         <!-- Fourth slide -->
                         <div class="item carousel-item-seven">
-                            
+
                         </div>
                     </div>
 
@@ -112,26 +111,37 @@
 
             <div class="main">
                 <div class="container">
-                    <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
-                    <div class="row margin-bottom-40">
-                        <!-- BEGIN SALE PRODUCT -->
-                        <div class="col-md-12 sale-product">
-                            <h2>Price lower 99.000</h2>
-                            <div class="owl-carousel owl-carousel5">
+                    <ul class="breadcrumb" style="font-weight: 700; font-size: 24px">
+                        <li class="active"><a href="home">Home</a></li>
+                        <li><a href="index">Store</a></li>
+                        <li class="active">${o.name}</li>
+                </ul>
+                <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
+                <div class="row margin-bottom-40">
+                    <!-- BEGIN SALE PRODUCT -->
+                    <div class="col-md-12 sale-product">
+                        <h2>Price lower 400000.0VND</h2>
+                        <div class="owl-carousel owl-carousel5">
 
                             <c:forEach items="${p5l}" var="o">
-                                <div class="product-item">
+                                <div class="product-item" style="width: 250px; height: 400px">
                                     <div class="pi-img-wrapper">
-                                        <img src="image/${o.image}" style="height: 250px" class="img-responsive" alt="Berry Lace Dress">
+                                        <img src="image/${o.image}" style="height: 300px" class="img-responsive" alt="Berry Lace Dress">
                                         <div>
                                             <a href="image/${o.image}" class="btn btn-default fancybox-button">Zoom</a>
 
                                         </div>
                                     </div>
                                     <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
-                                    <div class="pi-price">${o.price}</div>
-                                    <a href="addcart?action=AddToCartOnHome&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>
-                                    <!--<div class="sticker sticker-sale"></div>-->
+                                    <div class="pi-price">${o.price} VND &ensp; 
+                                        <c:if test="${o.sale != 0}">
+                                            <del class="price-availability-block"><span> ${o.cost}</span> VND</del> 
+                                        </c:if>
+                                    </div>
+<!--                                    <a href="addcart?action=AddToCartOnHome&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>-->
+                                    <c:if test="${o.sale != 0}">
+                                        <div class="sticker sticker-sale"></div>
+                                    </c:if>
                                 </div>
                             </c:forEach>
 
@@ -154,18 +164,27 @@
                             <h2>Product new</h2>
                             <div class="owl-carousel owl-carousel3" >
                             <c:forEach items="${p3l}" var="o">
-                                <div class="product-item">
+                                <div class="product-item" style="width: 250px; height: 400px">
                                     <div class="pi-img-wrapper">
-                                        <img src="image/${o.image}" style="height: 250px" class="img-responsive" alt="Berry Lace Dress">
+                                        <img src="image/${o.image}" style="height: 300px" class="img-responsive" alt="Berry Lace Dress">
                                         <div>
                                             <a href="image/${o.image}" class="btn btn-default fancybox-button">Zoom</a>
 
                                         </div>
                                     </div>
                                     <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
-                                    <div class="pi-price">${o.price}</div>
-                                    <a href="addcart?action=AddToCartOnHome&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>
-<!--                                <div class="sticker sticker-sale"></div>-->
+                                    <div class="pi-price">${o.price} VND &ensp; 
+                                        <c:if test="${o.sale != 0}">
+                                            <del class="price-availability-block"><span> ${o.cost}</span> VND</del> 
+                                        </c:if>
+                                    </div>
+                                    <c:if test="${o.sale != 0}">
+                                        <div class="sticker sticker-sale"></div>
+                                    </c:if>
+
+
+<!--                                    <a href="addcart?action=AddToCartOnHome&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>-->
+
                                 </div>
                             </c:forEach>
                         </div>
@@ -182,21 +201,27 @@
                     <div class="col-md-6 two-items-bottom-items">
                         <h2>Price cheapest</h2>
                         <div class="owl-carousel owl-carousel2">
-                                <c:forEach items="${p2l}" var="o">
-                                    <div class="product-item">
-                                        <div class="pi-img-wrapper">
-                                            <img src="image/${o.image}" style="height: 250px" class="img-responsive" alt="Berry Lace Dress">
-                                            <div>
-                                                <a href="image/${o.image}" class="btn btn-default fancybox-button">Zoom</a>
+                            <c:forEach items="${p2l}" var="o">
+                                <div class="product-item" style="width: 250px; height: 400px">
+                                    <div class="pi-img-wrapper">
+                                        <img src="image/${o.image}" style="height: 300px" class="img-responsive" alt="Berry Lace Dress">
+                                        <div>
+                                            <a href="image/${o.image}" class="btn btn-default fancybox-button">Zoom</a>
 
-                                            </div>
                                         </div>
-                                        <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
-                                        <div class="pi-price">${o.price}</div>
-                                        <a href="addcart?action=AddToCartOnHome&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>
-                                        <!--<div class="sticker sticker-sale"></div>-->
                                     </div>
-                                </c:forEach>
+                                    <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
+                                    <div class="pi-price text-right">${o.price} VND &ensp; 
+                                        <c:if test="${o.sale != 0}">
+                                            <del class="price-availability-block"><span> ${o.cost}</span> VND</del> 
+                                        </c:if>
+                                    </div>
+<!--                                        <a href="addcart?action=AddToCartOnHome&code=${o.id}" class="btn btn-default add2cart">Add to cart</a>-->
+                                    <c:if test="${o.sale != 0}">
+                                        <div class="sticker sticker-sale"></div>
+                                    </c:if>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <!-- END TWO PRODUCTS -->

@@ -71,7 +71,7 @@
                     <!-- Edit Modal HTML -->
                     <form action="editstatusbill" method="post" >
                         <div class="modal-header" style="background: #e94d1c; color: #FFF">						
-                            <h4 class="modal-title">Edit Category</h4>
+                            <h4 class="modal-title">Update Status Bill</h4>
                         </div>
                     <%
                         int billid = Integer.parseInt(request.getParameter("bill"));
