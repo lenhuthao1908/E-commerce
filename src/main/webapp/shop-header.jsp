@@ -4,11 +4,10 @@
     Author     : nhuth
 --%>
 
-<%@page import="entity.Cart"%>
-<%@page import="control.AddCartControl"%>
+<%@page import="entity.Cart" %>
+<%@page import="control.AddCartControl" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 
 <!-- BEGIN TOP BAR -->
@@ -34,17 +33,17 @@
                     <c:if test="${sessionScope.acc != null}">
                         <li><a href="shop-account.jsp"><i class="fa fa-user"></i>${sessionScope.acc.user}</a></li>
                         <li><a href="logout">LOGOUT</a></li>
-                        </c:if>
-                        <c:if test="${sessionScope.acc == null}">
+                    </c:if>
+                    <c:if test="${sessionScope.acc == null}">
                         <li><a href="shop-login-and-signup.jsp">LOGIN</a></li>
-                        </c:if>
+                    </c:if>
 
 
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
         </div>
-    </div>        
+    </div>
 </div>
 <!-- END TOP BAR -->
 
@@ -54,9 +53,10 @@
 
         <c:if test="${sessionScope.acc.isAdmin != 1 }">
             <c:if test="${sessionScope.acc.isSell != 1 }">
-                <a class="site-logo" href="home"><img src="assets/corporate/img/logos/NF--SHOP.png" alt="NF--Shop UI" > </a>
-                </c:if>
+                <a class="site-logo" href="home"><img src="assets/corporate/img/logos/NF--SHOP.png" alt="NF--Shop UI">
+                </a>
             </c:if>
+        </c:if>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -69,7 +69,7 @@
             <c:if test="${sessionScope.acc.isSell != 1 }">
                 <div class="top-cart-block">
                     <div class="top-cart-info">
-                        <a href="shop-shopping-cart.jsp" class="top-cart-info-count"> <%= count%> items</a>
+                        <a href="shop-shopping-cart.jsp" class="top-cart-info-count"><%= count%> items</a>
                     </div>
                     <i class="fa fa-shopping-cart"></i>
 
@@ -82,10 +82,13 @@
                                         Cart cart = AddCartControl.listcart.get(i);
                                 %>
                                 <li>
-                                    <a href="detail?pid=<%=cart.getCid().getId()%>"><img src="image/<%=cart.getCid().getImage()%>" width="37" height="34"></a>
+                                    <a href="detail?pid=<%=cart.getCid().getId()%>"><img
+                                            src="image/<%=cart.getCid().getImage()%>" width="37" height="34"></a>
                                     <span class="cart-content-count">x<%=cart.getQuantity()%></span>
-                                    <strong><a href="detail?pid=<%=cart.getCid().getId()%>"><%=cart.getCid().getName()%></a></strong>
-                                    <em><%= cart.getCid().getPrice() * cart.getQuantity()%></em>
+                                    <strong><a href="detail?pid=<%=cart.getCid().getId()%>"><%=cart.getCid().getName()%>
+                                    </a></strong>
+                                    <em><%= cart.getCid().getPrice() * cart.getQuantity()%>
+                                    </em>
                                 </li>
                                 <%
                                     }
@@ -105,7 +108,7 @@
 
 
         <!-- BEGIN NAVIGATION -->
-        <div class="header-navigation" >
+        <div class="header-navigation">
             <ul>
 
                 <c:if test="${sessionScope.acc.isAdmin != 1 or sessionScope.acc.isSell != 1}">
@@ -119,11 +122,15 @@
                                             <div class="col-md-3 col-sm-4 col-xs-6">
                                                 <div class="product-item">
                                                     <div class="pi-img-wrapper">
-                                                        <a href=""><img src="image/${o.image}" style="width: 200px; height: 250px;" class="img-responsive" alt="Berry Lace Dress"></a>
+                                                        <a href=""><img src="image/${o.image}"
+                                                                        style="width: 200px; height: 250px;"
+                                                                        class="img-responsive"
+                                                                        alt="Berry Lace Dress"></a>
                                                     </div>
                                                     <h3><a href="detail?pid=${o.id}">${o.name}</a></h3>
                                                     <div class="pi-price">${o.price}</div>
-                                                    <a href="detail?pid=${o.id}" class="btn btn-default add2cart">Detail</a>
+                                                    <a href="detail?pid=${o.id}"
+                                                       class="btn btn-default add2cart">Detail</a>
                                                 </div>
                                             </div>
                                         </c:forEach>
@@ -135,20 +142,18 @@
                 </c:if>
 
 
-
-                    
                 <c:if test="${sessionScope.acc.isAdmin == 1 }">
                     <li><a href="manageroverview">Manager Overview</a></li>
-                    </c:if>
+                </c:if>
                 <c:if test="${sessionScope.acc.isSell == 1 }">
                     <li><a href="manager">Manager Product</a></li>
-                    </c:if>
-                    <c:if test="${sessionScope.acc.isAdmin == 1 }">
+                </c:if>
+                <c:if test="${sessionScope.acc.isAdmin == 1 }">
                     <li><a href="managerorderbill">Manager Bill</a></li>
                     <li><a href="manageracc">Manager Admin</a></li>
                     <li><a href="managercc">Manager Category</a></li>
                     <li><a href="managersize">Manager Size</a></li>
-                    </c:if>
+                </c:if>
             </ul>
         </div>
         <!-- END NAVIGATION -->

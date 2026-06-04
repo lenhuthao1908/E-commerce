@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <c:if test="${sessionScope.acc.isAdmin != 1}">
     <c:if test="${sessionScope.acc.isSell != 1 }">
@@ -74,7 +74,8 @@
                         <address class="margin-bottom-40">
                             51, Ninh Kiều, Cần Thơ<br>
                             Phone: 036 339 528<br>
-                            Email: <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=DmwnWsmCLcsrnnsSbpQscHRWrwZCnCPBGcDLzqddqGhDnzQqXMcNtDMhZCVLFdllGJmlpcjHhFhv">haob1906661@student.ctu.edu.vn</a><br>
+                            Email: <a
+                                href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=DmwnWsmCLcsrnnsSbpQscHRWrwZCnCPBGcDLzqddqGhDnzQqXMcNtDMhZCVLFdllGJmlpcjHhFhv">haob1906661@student.ctu.edu.vn</a><br>
                         </address>
                     </div>
                     <!-- END BOTTOM CONTACTS -->
@@ -95,7 +96,8 @@
 
                     <!-- BEGIN POWERED -->
                     <div class="col-md-4 col-sm-4 text-right">
-                        <p class="powered">Powered by: <a href="https://www.facebook.com/profile.php?id=100071183202444">lenhuthao</a></p>
+                        <p class="powered">Powered by: <a
+                                href="https://www.facebook.com/profile.php?id=100071183202444">lenhuthao</a></p>
                     </div>
                     <!-- END POWERED -->
                 </div>

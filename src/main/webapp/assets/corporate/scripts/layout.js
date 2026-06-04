@@ -1,6 +1,6 @@
 var Layout = function () {
 
-     // IE mode
+    // IE mode
     var isRTL = false;
     var isIE8 = false;
     var isIE9 = false;
@@ -11,17 +11,17 @@ var Layout = function () {
 
     var responsiveHandlers = [];
 
-    var handleInit = function() {
+    var handleInit = function () {
 
         if ($('body').css('direction') === 'rtl') {
             isRTL = true;
         }
 
-        isIE8 = !! navigator.userAgent.match(/MSIE 8.0/);
-        isIE9 = !! navigator.userAgent.match(/MSIE 9.0/);
-        isIE10 = !! navigator.userAgent.match(/MSIE 10.0/);
-        isIE11 = !! navigator.userAgent.match(/MSIE 11.0/);
-        
+        isIE8 = !!navigator.userAgent.match(/MSIE 8.0/);
+        isIE9 = !!navigator.userAgent.match(/MSIE 9.0/);
+        isIE10 = !!navigator.userAgent.match(/MSIE 10.0/);
+        isIE11 = !!navigator.userAgent.match(/MSIE 11.0/);
+
         if (isIE10) {
             jQuery('html').addClass('ie10'); // detect IE10 version
         }
@@ -68,7 +68,7 @@ var Layout = function () {
         }
     }
 
-    var handleIEFixes = function() {
+    var handleIEFixes = function () {
         //fix html5 placeholder attribute for ie7 & ie8
         if (isIE8 || isIE9) { // ie8 & ie9
             // this is html5 placeholder fix for inputs, inputs with placeholder-no-fix class will be skipped(e.g: we need this for password fields)
@@ -107,8 +107,8 @@ var Layout = function () {
             $(this).slimScroll({
                 allowPageScroll: true, // allow page scroll when the element scroll is ended
                 size: '7px',
-                color: ($(this).attr("data-handle-color")  ? $(this).attr("data-handle-color") : '#bbb'),
-                railColor: ($(this).attr("data-rail-color")  ? $(this).attr("data-rail-color") : '#eaeaea'),
+                color: ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
+                railColor: ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#eaeaea'),
                 position: isRTL ? 'left' : 'right',
                 height: height,
                 alwaysVisible: ($(this).attr("data-always-visible") == "1" ? true : false),
@@ -118,32 +118,32 @@ var Layout = function () {
         });
     }
 
-    var handleSearch = function() {    
-        $('.search-btn').click(function () {            
-            if($('.search-btn').hasClass('show-search-icon')){
-                if ($(window).width()>767) {
+    var handleSearch = function () {
+        $('.search-btn').click(function () {
+            if ($('.search-btn').hasClass('show-search-icon')) {
+                if ($(window).width() > 767) {
                     $('.search-box').fadeOut(300);
                 } else {
                     $('.search-box').fadeOut(0);
                 }
                 $('.search-btn').removeClass('show-search-icon');
             } else {
-                if ($(window).width()>767) {
+                if ($(window).width() > 767) {
                     $('.search-box').fadeIn(300);
                 } else {
                     $('.search-box').fadeIn(0);
                 }
                 $('.search-btn').addClass('show-search-icon');
-            } 
-        }); 
+            }
+        });
 
         // close search box on body click
-        if($('.search-btn').size() != 0) {
-            $('.search-box, .search-btn').on('click', function(e){
+        if ($('.search-btn').size() != 0) {
+            $('.search-box, .search-btn').on('click', function (e) {
                 e.stopPropagation();
             });
 
-            $('body').on('click', function() {
+            $('body').on('click', function () {
                 if ($('.search-btn').hasClass('show-search-icon')) {
                     $('.search-btn').removeClass("show-search-icon");
                     $('.search-box').fadeOut(300);
@@ -152,25 +152,25 @@ var Layout = function () {
         }
     }
 
-    var handleMenu = function() {
+    var handleMenu = function () {
         $(".header .navbar-toggle").click(function () {
             if ($(".header .navbar-collapse").hasClass("open")) {
                 $(".header .navbar-collapse").slideDown(300)
-                .removeClass("open");
-            } else {             
+                    .removeClass("open");
+            } else {
                 $(".header .navbar-collapse").slideDown(300)
-                .addClass("open");
+                    .addClass("open");
             }
         });
     }
-    var handleSubMenuExt = function() {
-        $(".header-navigation .dropdown").on("hover", function() {
+    var handleSubMenuExt = function () {
+        $(".header-navigation .dropdown").on("hover", function () {
             if ($(this).children(".header-navigation-content-ext").show()) {
-                if ($(".header-navigation-content-ext").height()>=$(".header-navigation-description").height()) {
-                    $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height()+22);
+                if ($(".header-navigation-content-ext").height() >= $(".header-navigation-description").height()) {
+                    $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height() + 22);
                 }
             }
-        });        
+        });
     }
 
     var handleSidebarMenu = function () {
@@ -184,11 +184,11 @@ var Layout = function () {
                     $(this).removeClass("collapsed");
                     $(this).siblings(".dropdown-menu").slideUp(300);
                 }
-            } 
+            }
         });
     }
 
-    function handleDifInits() { 
+    function handleDifInits() {
         $(".header .navbar-toggle span:nth-child(2)").addClass("short-icon-bar");
         $(".header .navbar-toggle span:nth-child(4)").addClass("short-icon-bar");
     }
@@ -200,11 +200,11 @@ var Layout = function () {
         var test = $("input[type=checkbox]:not(.toggle), input[type=radio]:not(.toggle, .star)");
         if (test.size() > 0) {
             test.each(function () {
-                    if ($(this).parents(".checker").size() == 0) {
-                        $(this).show();
-                        $(this).uniform();
-                    }
-                });
+                if ($(this).parents(".checker").size() == 0) {
+                    $(this).show();
+                    $(this).uniform();
+                }
+            });
         }
     }
 
@@ -212,10 +212,10 @@ var Layout = function () {
         if (!jQuery.fancybox) {
             return;
         }
-        
+
         jQuery(".fancybox-fast-view").fancybox();
 
-        if (jQuery(".fancybox-button").size() > 0) {            
+        if (jQuery(".fancybox-button").size() > 0) {
             jQuery(".fancybox-button").fancybox({
                 groupAttr: 'data-rel',
                 prevEffect: 'none',
@@ -236,11 +236,11 @@ var Layout = function () {
 
     // Handles Bootstrap Accordions.
     var handleAccordions = function () {
-       
+
         jQuery('body').on('shown.bs.collapse', '.accordion.scrollable', function (e) {
             Layout.scrollTo($(e.target), -100);
         });
-        
+
     }
 
     // Handles Bootstrap Tabs.
@@ -258,18 +258,18 @@ var Layout = function () {
     }
 
     var handleMobiToggler = function () {
-        $(".mobi-toggler").on("click", function(event) {
+        $(".mobi-toggler").on("click", function (event) {
             event.preventDefault();//the default action of the event will not be triggered
-            
+
             $(".header").toggleClass("menuOpened");
             $(".header").find(".header-navigation").toggle(300);
         });
     }
 
     var handleTheme = function () {
-    
+
         var panel = $('.color-panel');
-    
+
         // handle theme colors
         var setColor = function (color) {
             $('#style-color').attr("href", "../../assets/corporate/css/themes/" + color + ".css");
@@ -294,7 +294,7 @@ var Layout = function () {
             $(this).addClass("current");
         });
     }
-	
+
     return {
         init: function () {
             // init core variables
@@ -316,20 +316,26 @@ var Layout = function () {
         initUniform: function (els) {
             if (els) {
                 jQuery(els).each(function () {
-                        if ($(this).parents(".checker").size() == 0) {
-                            $(this).show();
-                            $(this).uniform();
-                        }
-                    });
+                    if ($(this).parents(".checker").size() == 0) {
+                        $(this).show();
+                        $(this).uniform();
+                    }
+                });
             } else {
                 handleUniform();
             }
         },
 
         initTwitter: function () {
-            !function(d,s,id){
-                var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}
-            }(document,"script","twitter-wjs");
+            !function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + "://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }(document, "script", "twitter-wjs");
         },
 
         initTouchspin: function () {
@@ -342,30 +348,28 @@ var Layout = function () {
         },
 
         initFixHeaderWithPreHeader: function () {
-            jQuery(window).scroll(function() {                
-                if (jQuery(window).scrollTop()>37){
+            jQuery(window).scroll(function () {
+                if (jQuery(window).scrollTop() > 37) {
                     jQuery("body").addClass("page-header-fixed");
-                }
-                else {
+                } else {
                     jQuery("body").removeClass("page-header-fixed");
                 }
             });
         },
 
         initNavScrolling: function () {
-            function NavScrolling () {
-                if (jQuery(window).scrollTop()>60){
+            function NavScrolling() {
+                if (jQuery(window).scrollTop() > 60) {
                     jQuery(".header").addClass("reduce-header");
-                }
-                else {
+                } else {
                     jQuery(".header").removeClass("reduce-header");
                 }
             }
-            
+
             NavScrolling();
-            
-            jQuery(window).scroll(function() {
-                NavScrolling ();
+
+            jQuery(window).scroll(function () {
+                NavScrolling();
             });
         },
 
@@ -375,7 +379,7 @@ var Layout = function () {
                 navigation: true,
                 items: 6,
                 addClassActive: true,
-                itemsCustom : [
+                itemsCustom: [
                     [0, 1],
                     [320, 1],
                     [480, 2],
@@ -392,7 +396,7 @@ var Layout = function () {
                 navigation: true,
                 items: 5,
                 addClassActive: true,
-                itemsCustom : [
+                itemsCustom: [
                     [0, 1],
                     [320, 1],
                     [480, 2],
@@ -419,7 +423,7 @@ var Layout = function () {
                 navigation: true,
                 items: 3,
                 addClassActive: true,
-                itemsCustom : [
+                itemsCustom: [
                     [0, 1],
                     [320, 1],
                     [480, 2],
@@ -437,7 +441,7 @@ var Layout = function () {
                 navigation: true,
                 items: 2,
                 addClassActive: true,
-                itemsCustom : [
+                itemsCustom: [
                     [0, 1],
                     [320, 1],
                     [480, 2],
@@ -455,17 +459,17 @@ var Layout = function () {
         },
 
         initSliderRange: function () {
-            $( "#slider-range" ).slider({
-              range: true,
-              min: 0,
-              max: 500,
-              values: [ 50, 250 ],
-              slide: function( event, ui ) {
-                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-              }
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [50, 250],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
             });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1));
         },
 
         // wrapper function to scroll(focus) to an element
@@ -473,8 +477,8 @@ var Layout = function () {
             var pos = (el && el.size() > 0) ? el.offset().top : 0;
             if (el) {
                 if ($('body').hasClass('page-header-fixed')) {
-                    pos = pos - $('.header').height(); 
-                }            
+                    pos = pos - $('.header').height();
+                }
                 pos = pos + (offeset ? offeset : -1 * el.height());
             }
 
@@ -493,9 +497,9 @@ var Layout = function () {
         },
 
         gridOption1: function () {
-            $(function(){
+            $(function () {
                 $('.grid-v1').mixitup();
-            });    
+            });
         }
 
     };
