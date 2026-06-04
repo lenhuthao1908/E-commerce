@@ -27,10 +27,10 @@ public class DBContext {
     /*Insert your other code right after this comment*/
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
     private final String dbType = "postgresql"; // Change this to "mysql" or "sqlserver" as needed
-    private final String serverName = "ep-plain-bar-a18ptdwy-pooler.ap-southeast-1.aws.neon.tech";
-    private final String dbName = "DEV022025";
-    private final String userID = "postgre_db_owner";
-    private final String password = "iv31fQxcuPyV";
+    private final String serverName = "ep-quiet-mouse-ao9mr3q6-pooler.c-2.ap-southeast-1.aws.neon.tech";
+    private final String dbName = "neondb";
+    private final String userID = "neondb_owner";
+    private final String password = "npg_IuiEd2xnsR3H";
 
     public static void main(String[] args) {
         try {

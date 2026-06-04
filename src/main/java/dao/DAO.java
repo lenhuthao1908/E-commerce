@@ -509,10 +509,10 @@ public class DAO {
         return list;
     }
 
-    public Account login(String user, String pass) {
+    public Account login(String user, String pass) throws Exception {
         String query = "select * from account\n"
-                + "where [user] = ?\n"
-                + "and pass = ?";
+                + "where username = ?\n"
+                + "and password = ?";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -533,13 +533,14 @@ public class DAO {
                         rs.getString(11));
             }
         } catch (Exception e) {
+            throw new Exception(e);
         }
         return null;
     }
 
     public Account checkAccountExist(String user) {
         String query = "select * from account\n"
-                + "where [user] = ?\n";
+                + "where username = ?\n";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -651,7 +652,7 @@ public class DAO {
     }
 
     public void insertAccount(String user, String pass, int isSell, int isAdmin, String fullname, int phone, String email, String city, String district, String ward) {
-        String query = "INSERT [dbo].[Account]([user],[pass],[isSell],[isAdmin], [fullname], [phone], [Email], [City], [District], [Ward])\n"
+        String query = "INSERT [dbo].[Account]([username],[password],[isSell],[isAdmin], [fullname], [phone], [Email], [City], [District], [Ward])\n"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
@@ -673,8 +674,8 @@ public class DAO {
 
     public void editAccount(String user, String pass, int isSell, int isAdmin, String fullname, int phone, String email, String city, String district, String ward, int uID) {
         String query = "update Account\n"
-                + "set [user] = ?,\n"
-                + "[pass] = ?,\n"
+                + "set [username] = ?,\n"
+                + "[password] = ?,\n"
                 + "[isSell] = ?,\n"
                 + "[isAdmin] = ?,\n"
                 + "[fullname] = ?,\n"
@@ -705,7 +706,7 @@ public class DAO {
 
     public void editMyAccount(String user, String fullname, int phone, String email, String city, String district, String ward, int uID) {
         String query = "update Account\n"
-                + "set [user] = ?,\n"
+                + "set [username] = ?,\n"
                 + "[fullname] = ?,\n"
                 + "[phone] = ?,\n"
                 + "[Email] = ?,\n"
@@ -1001,8 +1002,8 @@ public class DAO {
 
     public void updatepass(String user, String newpass) {
         String query = "update account\n"
-                + "set pass = ?\n"
-                + "where [user] = ?";
+                + "set password = ?\n"
+                + "where [username] = ?";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
