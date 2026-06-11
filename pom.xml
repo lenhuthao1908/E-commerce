@@ -8,7 +8,7 @@
     <groupId>com.ecommerce</groupId>
     <artifactId>ecommerce-app</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>ecommerce-app</name>
     <description>E-commerce Shop Management System</description>
